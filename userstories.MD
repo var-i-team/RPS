@@ -1,22 +1,19 @@
 
 ***User***
 
-As a user, I want an interactive and simple app that is easy to use with streamlined service while providing accurate feedback.
-
-As a user, I want easy navigation of the application with no apparent faults within.
-
-As a user, I want an engaging application that is enjoyable to use with fun looks while seeing how many times I have won and lost.
+As a user, I want an interactive and simple game that is easy to understand and use. 
 
 As a user, I want to be able to see no unfinished content and a clean appearance.
 
-As a user, I want to have the ability to select the length of the game to play.
+As a user, I want easy navigation of the application with no apparent faults within.
 
-As a user, I want to play an interactive game outside of rock paper scissors.
+As a user, I want to be able to see who was behind creating the game.
 
-As a user, I would like playful icons that are stimulating and not unattractive.
+As a user, I want to be able to clearly see the results of every game.
 
-As a user, I want a time limit or play limit that keeps the game feeling like it has a pace that needs to be kept.
+As a user, I want to be able to input my screenname and have the game keep track of my score.
 
+As a user, I want to have the ability to select the length of the game to play in one sitting.
 
 ***Developer Team***
 
@@ -28,6 +25,16 @@ As a Dev, I want to make an application that can be useful and fun to my users a
 
 As a Dev, I want to showcase my product in such a way that it reflects my care and current skills.
 
+<!-- Stretch Goals -->
 
+***User***
 
+As a user, I would like playful, animated icons that are stimulating and attractive.
 
+As a user, I want to play an interactive game seperate but in conjunction with the base rock paper scissors game.
+
+As a user, I want a time limit or play limit that keeps the game feeling like it has a pace that needs to be kept.
+
+As a user, I want an engaging event or boss battle that is more challenging than the base game.
+
+As a user, I want to be able to share and brag about my scores with my social media followers.
