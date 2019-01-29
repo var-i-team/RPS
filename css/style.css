@@ -1,0 +1,9 @@
+body{ background-color: ivory; }
+
+#delayCanvas{
+    border:1px solid red; 
+    margin:0 auto;
+    /* display: none; */
+    width: 175px;
+    height: 175px;
+}
