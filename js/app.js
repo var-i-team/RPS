@@ -1,8 +1,12 @@
 'use strict';
 
 var rps = document.getElementById('rps');
+var rock = document.getElementById('rock');
+var paper = document.getElementById('paper');
+var scissors = document.getElementById('scissors');
 var playerWins = 0;
 var turnCount = 0;
+
 
 
 function handleClick(event){
