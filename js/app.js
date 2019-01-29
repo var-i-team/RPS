@@ -5,27 +5,36 @@ var paper = document.getElementById('paper');
 var scissors = document.getElementById('scissors');
 var banner = document.getElementById('banner');
 var choiceArray = [rock, paper, scissors];
-
 var playerWins = 0;
 var turnCount = 0;
 
 
 
-function handleClick(event){
-  // var userChoice = event.target.alt;
-  var compChoice =  choiceArray[Math.floor(Math.random() * choiceArray.length)].alt;
+function handleRps(event){
+  var userChoice = event.target;
+  var compChoice = choiceArray[Math.floor(Math.random() * choiceArray.length)];
   console.log(compChoice);
+  function showResults(){
+    gameDiv.innerHTML = userChoice, compChoice;
+    gameDiv.appendChild(userChoice);
+    gameDiv.appendChild(compChoice);
+  }  
   function win () {
     banner.textContent= 'You Win!';
+    showResults();
+
   }
   function lose () {
     banner.textContent= 'You Lose!';
+    showResults();
   }
   function gameOver () {
     banner.textContent= 'GAME OVER!';
+    showResults();
   }
   function tie(){
     banner.textContent = 'Tied, try again!';
+    showResults();
   }
   if(event.target.id === 'rps'){
     return;
@@ -98,5 +107,4 @@ function handleClick(event){
   }
 }
 
-gameDiv.addEventListener('click', handleClick);
-
+gameDiv.addEventListener('click', handleRps);
