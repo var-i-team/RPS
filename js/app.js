@@ -14,11 +14,15 @@ function handleRps(event){
 
   var choiceArray = ['rock', 'paper', 'scissors'];
   var userChoice = event.target.alt;
-  var compChoice = choiceArray[Math.floor(Math.random() * choiceArray.length)];
-  console.log('player\'s choice', userChoice);
-  console.log('computer\'s choice', compChoice);
+	var compChoice = choiceArray[Math.floor(Math.random() * choiceArray.length)];
+	
+	
+  // console.log('player\'s choice', userChoice);
+  // console.log('computer\'s choice', compChoice);
 
   function showResults(){
+		gameDiv.style.display = 'none';
+		delayscreen();
     gameDiv.innerHTML = '';
     var img = document.createElement('img');
     img.src = `img/${userChoice}-results.jpg`;
@@ -50,7 +54,8 @@ function handleRps(event){
     img.src = 'img/scissors.jpg';
     img.alt = 'scissors';
     img.title = 'scissors';
-    gameDiv.appendChild(img);
+		gameDiv.appendChild(img);
+		banner.style.display = 'none';
   }
 
   if(userChoice === 'rock-results' || userChoice === 'paper-results' || userChoice === 'scissors-results'){
@@ -65,17 +70,17 @@ function handleRps(event){
   function win () {
     turnCount++;
     playerRoundWins++;
-    banner.textContent = 'You Win!';
-    showResults();
+		showResults();
+		banner.textContent = 'You Win!';
   }
   function lose () {
     turnCount++;
-    banner.textContent = 'You Lose!';
-    showResults();
+		showResults();
+		banner.textContent = 'You Lose!';
   }
   function gameOver () {
     banner.textContent = 'GAME OVER!';
-    winLose.hidden = false;
+    winLose.hidden = true;
     winLose.innerHTML = '';
     if(playerRoundWins > 1){
       playerWins++;
@@ -93,8 +98,8 @@ function handleRps(event){
     compRoundWinds = 0;
   }
   function tie(){
-    banner.textContent = 'Tied, try again!';
-    showResults();
+		showResults();
+		banner.textContent = 'Tied, try again!';
   }
 
   if(userChoice === 'rock'){
@@ -162,7 +167,8 @@ function drawText(text){
 
 
 function animate(time){
-  tmp_latestTime = time;
+	tmp_latestTime = time;
+	delayCanvas.style.display = 'block';
   if(time<nextTime){
     requestAnimationFrame(animate);
     return;
@@ -176,7 +182,10 @@ function animate(time){
     requestAnimationFrame(animate);
     return;
   }
-  delayCanvas.style.display = 'none';
+	delayCanvas.style.display = 'none';
+	gameDiv.style.display = 'block';
+	banner.style.display = 'block';
+	winLose.hidden = false;
 }
 
 
@@ -186,3 +195,5 @@ function delayscreen(){
 }
 
 gameDiv.addEventListener('click', handleRps);
+
+
