@@ -37,7 +37,7 @@ function handleRps(event){
   function showChoices(){
     gameDiv.innerHTML = '';
     winLose.hidden = true;
-    banner.innerHTML = 'This is where win/lose/game over goes';
+    banner.innerHTML = 'Plan your throw!';
     var img = document.createElement('img');
     img.src = 'img/Rock.jpg';
     img.alt = 'Rock';

@@ -1,16 +1,10 @@
-/* /* * {
-  background-color: #10374D;
-  color: rgb(169, 227, 250);
-
-} */
-
 /* ------------------------ */
 /* HEADER */
 /* ------------------------ */
 
 header {
   background-color: #10374D;
-  height: 150px;
+  height: 165px;
   margin-bottom: 15px;
 }
 
@@ -33,6 +27,7 @@ header nav{
   cursor: crosshair;
   border: 3px solid #3A7A88;
   border-radius: 6px;
+  padding: 2px;
 
 }
 
@@ -62,14 +57,9 @@ header nav{
 }
 
 .nav-links:hover {
-  background: #99AB99;
+  background: rgb(165, 180, 248);
 
 }
-
-
-/* nav ul {
-  float: right;
-} */
 
 /* ------------------------ */
 /* BODY */
@@ -78,6 +68,24 @@ header nav{
 body {
   background-color: #055572;
   color: rgb(169, 227, 250);
+  font-family: 'Shadows Into Light', cursive, sans-serif;
+  font-size: 24px;
+  letter-spacing: 2px;
+  
+}
+
+#results {
+  display: flex;
+  max-width: 450px;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid black;
+  border-radius: 6px;
+
+}
+
+#results h2 {
+  display: inline-block;
 
 }
 
@@ -88,8 +96,9 @@ body {
 footer section {
   background-color: #99AB99;
   color: black;
-  height: 100px;
+  height: 35px;
   border: 5px solid black;
   display: block;
+  text-align: center;
 
 }

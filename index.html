@@ -5,34 +5,35 @@
     <link rel="stylesheet" href="css/reset.css" type="text/css"/>
     <link rel="stylesheet" href="css/style.css" type="text/css"/>
     <link href="https://fonts.googleapis.com/css?family=Yellowtail" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet">
     <title>RPS</title>
   </head>
   <body>
     <header>
       <nav>
         <a class="nav-links" id="high-score" href="">Highscore</a>
-
         <a href="index.html">
           <img id="logo" src="img/logo.jpg" alt="logo" title="logo"/>
         </a>
-      
         <a class="nav-links" id="about" href="about/about.html">About Us</a> 
       </nav>
     </header>
 
     <main>
-      <h2 id="banner">This is where win/lose/game over goes</h2>
-      <h2 id="win-lose" hidden=true></h2>
-      <ul>
-        <li id="win">Times Won:</li>
-        <li id="lose">Times Lost:</li>
-        <li id="total-games">Total Games:</li>
-      </ul>
+      <!-- This is where win/lose/tie/game over is displayed -->
+      <section id="results">
+        <h2 id="banner">Plan your throw!</h2>
+        <h2 id="win-lose" hidden=true></h2>
+      </section>
+
+      <h3 id="total-games">Total Games:</h3>
+      <h3 id="win">Times Won:</h3>
       <div id="rps">
         <img src="img/Rock.jpg" title="Rock" alt="Rock">
         <img src="img/Paper.jpg" title="Paper" alt="Paper">
         <img src="img/Scissors.jpg" title="Scissors" alt="Scissors">
       </div>
+      <h3 id="lose">Times Lost:</h3>
       <form>
         <fieldset>
           <legend>Enter your name</legend>
