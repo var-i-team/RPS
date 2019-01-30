@@ -1,37 +1,24 @@
 'use strict';
-
 var gameDiv = document.getElementById('rps');
+var banner = document.getElementById('banner');
+var winLose = document.getElementById('win-lose');
+var timesWon = document.getElementById('win');
+var timesLost = document.getElementById('lose');
+var totalGames = document.getElementById('total-games');
 var totalPlayed = 0;
 var playerWins = 0;
 var playerLosses = 0;
 var turnCount = 0;
 var playerRoundWins = 0;
 var compRoundWins = 0;
-var choiceArray = [];
-
-function Choice(name, beats, loses){
-  this.name = name;
-  this.filepath = `img/${name}.jpg`;
-  this.beats = beats;
-  this.loses = loses;
-  choiceArray.push(this);
-}
-
-new Choice('Rock', 'Paper', 'Scissors');
-new Choice('Paper', 'Scissors', 'Rock');
-new Choice('Scissors', 'Rock', 'Paper');
 
 function handleRps(event){
 
-  var banner = document.getElementById('banner');
-  var winLose = document.getElementById('win-lose');
-  var timesWon = document.getElementById('win');
-  var timesLost = document.getElementById('lose');
-  var totalGames = document.getElementById('total-games');
+  var choiceArray = ['Rock', 'Paper', 'Scissors'];
   var userChoice = event.target.alt;
   var compChoice = choiceArray[Math.floor(Math.random() * choiceArray.length)];
-  console.log('player\'s choice', userChoice);
-  console.log('computer\'s choice', compChoice);
+  console.log('Player\'s choice', userChoice);
+  console.log('Computer\'s choice', compChoice);
 
   function showResults(){
     gameDiv.innerHTML = '';
