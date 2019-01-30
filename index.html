@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet">
     <title>RPS</title>
   </head>
+
   <body>
     <header>
       <nav>
@@ -20,7 +21,6 @@
     </header>
 
     <main>
-      <!-- This is where win/lose/tie/game over is displayed -->
       <section id="results">
         <h2 id="banner">Plan your throw!</h2>
         <h2 id="win-lose" hidden=true></h2>
@@ -44,8 +44,8 @@
           <button class="name-field" type="submit">Click to continue</button>
         </fieldset>
       </form>
-      <canvas id="gameCanvas" ></canvas>
-      <canvas></canvas>
+      <canvas id="delayCanvas" width="200" height="200" ></canvas>
+      <!-- <canvas></canvas> -->
     </main>
 
     <footer>
