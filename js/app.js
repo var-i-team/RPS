@@ -36,7 +36,7 @@ function handleRps(event){
 
   function showChoices(){
     gameDiv.innerHTML = '';
-    winLose.hidden = true;
+    winLose.textContent = '';
     banner.innerHTML = 'Plan your throw!';
     var img = document.createElement('img');
     img.src = 'img/Rock.jpg';

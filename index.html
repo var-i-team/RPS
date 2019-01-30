@@ -26,20 +26,22 @@
         <h2 id="win-lose" hidden=true></h2>
       </section>
 
-      <h3 id="total-games">Total Games:</h3>
-      <h3 id="win">Times Won:</h3>
+      <h3 id="total-games">Total Games: 0</h3>
+      <h3 id="win">Times Won: 0</h3>
+      <h3 id="lose">Times Lost: 0</h3>
+
       <div id="rps">
         <img src="img/Rock.jpg" title="Rock" alt="Rock">
         <img src="img/Paper.jpg" title="Paper" alt="Paper">
         <img src="img/Scissors.jpg" title="Scissors" alt="Scissors">
       </div>
-      <h3 id="lose">Times Lost:</h3>
+
       <form>
         <fieldset>
-          <legend>Enter your name</legend>
-          <label for="name">Name:</label>
-          <input name="name" type="text" size="15" required/>
-          <button type="submit">Click to continue</button>
+          <legend class="name-field">Enter your name</legend>
+          <label class="name-field" for="name">Name:</label>
+          <input class="name-field" name="name" type="text" size="15" required/>
+          <button class="name-field" type="submit">Click to continue</button>
         </fieldset>
       </form>
       <canvas id="gameCanvas" ></canvas>

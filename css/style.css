@@ -4,7 +4,7 @@
 
 header {
   background-color: #10374D;
-  height: 165px;
+  height: 150px;
   margin-bottom: 15px;
 }
 
@@ -21,7 +21,7 @@ header nav{
 }
 
 #logo {
-  max-height: 124px;
+  max-height: 115px;
   align-items: center;
   margin-top: 13px;
   cursor: crosshair;
@@ -71,20 +71,74 @@ body {
   font-family: 'Shadows Into Light', cursive, sans-serif;
   font-size: 24px;
   letter-spacing: 2px;
-  
+  text-shadow: 2px 2px black;
+
 }
 
 #results {
   display: flex;
-  max-width: 450px;
   justify-content: center;
   align-items: center;
-  border: 3px solid black;
-  border-radius: 6px;
+  height: 60px;
+  width: 350px;
+  margin-left: auto;
+  margin-right: auto;
 
 }
 
 #results h2 {
+  float: left;
+  clear: both;
+  text-align: center;
+  font-size: 42px;
+  text-shadow: 2px 2px black;
+
+}
+
+#total-games {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+
+}
+
+#win {
+  float: left;
+  padding-left: 200px;
+
+}
+
+#rps {
+  display: flex;
+  width: 650px;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+#rps img {
+  margin: 5px;
+  border: 5px groove rgb(131, 0, 0);
+
+}
+
+#lose {
+  float: right;
+  padding-right: 200px;
+
+}
+
+body form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.name-field {
   display: inline-block;
 
 }
@@ -96,8 +150,7 @@ body {
 footer section {
   background-color: #99AB99;
   color: black;
-  height: 35px;
-  border: 5px solid black;
+  height: auto;
   display: block;
   text-align: center;
 
