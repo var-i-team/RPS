@@ -163,21 +163,20 @@ function drawText(text){
 
 function animate(time){
   tmp_latestTime = time;
-  // console.log(“time:” + time + “\t nextTime:” + nextTime);
-
   if(time<nextTime){
     requestAnimationFrame(animate);
     return;
   }
   nextTime= time + duration;
   ctx.clearRect(0,0,cw,ch);
+
   drawText(texts[i]);
   i++;
   if(i<texts.length){
     requestAnimationFrame(animate);
     return;
   }
-  delayCanvas.style.display = 'none'
+  delayCanvas.style.display = 'none';
 }
 
 
