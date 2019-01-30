@@ -3,14 +3,14 @@ var delayCanvas = document.getElementById('delayCanvas');
 var ctx = delayCanvas.getContext('2d');
 var gameDiv = document.getElementById('rps');
 var banner = document.getElementById('banner');
+var winLose = document.getElementById('win-lose');
+var totalPlayed = 0;
 var playerWins = 0;
 var turnCount = 0;
+var compRoundWinds;
+var playerRoundWins = 0;
 
 function handleRps(event){
-
-  if(event.target.id === 'rps'){
-    return;
-  }
 
   var choiceArray = ['rock', 'paper', 'scissors'];
   var userChoice = event.target.alt;
@@ -30,10 +30,11 @@ function handleRps(event){
     img.alt = `${compChoice}-results`;
     img.title = `${compChoice}-results`;
     gameDiv.appendChild(img);
-    return;
   }
+
   function showChoices(){
     gameDiv.innerHTML = '';
+    winLose.hidden = true;
     banner.innerHTML = 'This is where win/lose/game over goes';
     var img = document.createElement('img');
     img.src = 'img/rock.jpg';
@@ -50,27 +51,50 @@ function handleRps(event){
     img.alt = 'scissors';
     img.title = 'scissors';
     gameDiv.appendChild(img);
-    return;
-  }
-  function win () {
-    banner.textContent= 'You Win!';
-    showResults();
-  }
-  function lose () {
-    banner.textContent= 'You Lose!';
-    showResults();
-  }
-  function gameOver () {
-    banner.textContent= 'GAME OVER!';
-    showResults();
-  }
-  function tie(){
-    banner.textContent = 'Tied, try again!';
-    showResults();
   }
 
   if(userChoice === 'rock-results' || userChoice === 'paper-results' || userChoice === 'scissors-results'){
     showChoices();
+    return;
+  }
+
+  if(event.target.id === 'rps'){
+    return;
+  }
+
+  function win () {
+    turnCount++;
+    playerRoundWins++;
+    banner.textContent = 'You Win!';
+    showResults();
+  }
+  function lose () {
+    turnCount++;
+    banner.textContent = 'You Lose!';
+    showResults();
+  }
+  function gameOver () {
+    banner.textContent = 'GAME OVER!';
+    winLose.hidden = false;
+    winLose.innerHTML = '';
+    if(playerRoundWins > 1){
+      playerWins++;
+      compRoundWinds = (turnCount - playerRoundWins);
+      winLose.textContent = (`You won ${playerRoundWins} to ${compRoundWinds}!`);
+    }
+    if(playerRoundWins < 2){
+      playerWins++;
+      compRoundWinds = (turnCount - playerRoundWins);
+      winLose.textContent = (`You lost ${playerRoundWins} to ${compRoundWinds}...`);
+    }
+    showResults();
+    turnCount = 0;
+    playerRoundWins = 0;
+    compRoundWinds = 0;
+  }
+  function tie(){
+    banner.textContent = 'Tied, try again!';
+    showResults();
   }
 
   if(userChoice === 'rock'){
@@ -78,64 +102,41 @@ function handleRps(event){
       tie();
     }
     if(compChoice === 'paper'){
-      turnCount++;
-      if(turnCount >= 3){
-        gameOver();
-      }
       lose();
     }
     if(compChoice === 'scissors') {
-      playerWins++;
-      turnCount++;
-      if(turnCount >= 3){
-        gameOver();
-      }
       win();
     }
   }
   if(userChoice === 'paper'){
     if(compChoice === 'rock'){
-      playerWins++;
-      turnCount++;
-      if(turnCount >= 3){
-        gameOver();
-      }
       win();
     }
     if(compChoice === 'paper'){
       tie();
     }
     if(compChoice === 'scissors') {
-      turnCount++;
-      if(turnCount >= 3){
-        gameOver();
-      }
       lose();
     }
   }
 
   if(userChoice === 'scissors'){
     if(compChoice === 'rock'){
-      turnCount++;
-      if(turnCount >= 3){
-        lose();
-        gameOver();
-      }
       lose();
     }
     if(compChoice === 'paper'){
-      playerWins++;
-      turnCount++;
-      if(turnCount >= 3){
-        win();
-        gameOver();
-      }
       win();
     }
     if(compChoice === 'scissors'){
       tie();
     }
   }
+
+  console.log('turn count:', turnCount);
+  if(turnCount > 2 || playerRoundWins > 1){
+    gameOver();
+  }
+
 }
 
 // Canvas element
