@@ -15,14 +15,16 @@ var turnCount = 0;
 var playerRoundWins = 0;
 var compRoundWins = 0;
 
+var savedTotalPlayed = JSON.parse(localStorage.getItem('totalPlayed'));
+
 
 function handleRps(event){
 
 	var choiceArray = ['Rock', 'Paper', 'Scissors'];
   var userChoice = event.target.alt;
   var compChoice = choiceArray[Math.floor(Math.random() * choiceArray.length)];
-  // console.log('Player\'s choice', userChoice);
-  // console.log('Computer\'s choice', compChoice);
+  console.log('Player\'s choice', userChoice);
+  console.log('Computer\'s choice', compChoice);
 
   function showResults(){
 		banner.hidden = true;
@@ -81,7 +83,8 @@ function handleRps(event){
 		banner.textContent = 'You Win!';
   }
   function lose () {
-    turnCount++;
+		turnCount++;
+		compRoundWins++;
 		showResults();
 		banner.textContent = 'You Lose!';
 	}
@@ -97,7 +100,10 @@ function handleRps(event){
 		winLose.innerHTML = '';
     if(playerRoundWins > 1){
       totalPlayed++;
-      playerWins++;
+			playerWins++;
+			console.log(totalPlayed);
+			console.log(playerWins);
+			console.log(playerLosses);
       timesWon.textContent = `Times Won: ${playerWins}`;
       timesLost.textContent = `Times Lost: ${playerLosses}`;
       totalGames.textContent = `Total Games: ${totalPlayed}`;
@@ -105,7 +111,10 @@ function handleRps(event){
     }
     if(playerRoundWins < 2){
       totalPlayed++;
-      playerLosses++;
+			playerLosses++;
+			console.log(totalPlayed);
+			console.log(playerWins);
+			console.log(playerLosses);
       timesWon.textContent = `Times Won: ${playerWins}`;
       timesLost.textContent = `Times Lost: ${playerLosses}`;
       totalGames.textContent = `Total Games: ${totalPlayed}`;
@@ -115,6 +124,7 @@ function handleRps(event){
     turnCount = 0;
     playerRoundWins = 0;
     compRoundWins = 0;
+    localStorage.setItem('totalPlayed', JSON.stringify(totalPlayed));
   }
   
 
