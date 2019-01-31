@@ -16,6 +16,7 @@ var ctx = delayCanvas.getContext('2d');
 var totalPlayed = 0;
 var playerWins = 0;
 var playerLosses = 0;
+
 var maxRounds = 3;
 var playerOneRoundWins = 0;
 var playerTwoRoundWins = 0;
@@ -61,6 +62,7 @@ function handleRps(event) {
   function showResults(){
     banner.style.display = 'none';
     playAgain.style.display = 'none';
+
     gameDiv.style.display = 'none';
     delayscreen();
     gameDiv.innerHTML = '';
@@ -79,13 +81,28 @@ function handleRps(event) {
   function win () {
     playerOneRoundWins++;
     banner.textContent = 'You Win!';
+        var audio = new Audio('audio/win2.wav');
+    setTimeout(function(){ 
+      audio.play(); }
+    , 3000);
+
   }
   function lose () {
     playerTwoRoundWins++;
     banner.textContent = 'You Lose!';
+        var audio = new Audio('audio/lose.wav');
+    setTimeout(function(){ 
+      audio.play(); }
+    , 3000);
+
   }
   function tie(){
     banner.textContent = 'Tied, try again!';
+        var audio = new Audio('audio/balala.wav');
+    setTimeout(function(){ 
+      audio.play(); }
+    , 3000);
+
   }
 
   function gameOver () {
@@ -96,9 +113,38 @@ function handleRps(event) {
     playAgain.textContent = `To make it best of ${(maxRounds + 2)} choose your next move, or click here to start a new game!`;
     if((playerOneRoundWins * 2) > maxRounds){
       banner.textContent = (`You won ${playerOneRoundWins} to ${playerTwoRoundWins}!`);
+            winLose.textContent = (`You won ${playerRoundWins} to ${compRoundWins}!`);
+      var audio = new Audio('audio/gameover.wav');
+      setTimeout(function(){
+        audio.play();}
+      , 4000);
+
     }
     if((playerTwoRoundWins * 2) > maxRounds){
       banner.textContent = (`You lost ${playerOneRoundWins} to ${playerTwoRoundWins}...`);
+            var audio = new Audio('audio/mario_failed.wav');
+      setTimeout(function(){ 
+        audio.play(); 
+      }
+      , 4000);
+
+    }
+
+    
+    showResults();
+    
+    turnCount = 0;
+    playerRoundWins = 0;
+    compRoundWins = 0; 
+    
+    // LocalStorage
+    if(savedTotalPlayed!== null){
+      totalPlayed = savedTotalPlayed;
+      console.log('totalPlayed:', totalPlayed);
+      localStorage.setItem('totalPlayed', JSON.stringify(totalPlayed));
+    } else {
+      totalGames.textContent = `Total Games: ${totalPlayed}`;
+      localStorage.setItem('totalPlayed', JSON.stringify(totalPlayed));
     }
   }
 
@@ -173,6 +219,9 @@ function handleRps(event) {
 
   function delayscreen(){
     i = 0;
+      var audio = new Audio('audio/drum.wav');
+  audio.play();
+
     requestAnimationFrame(animate);
   }
 
@@ -187,39 +236,6 @@ function handleRps(event) {
   if(userChoice === 'Rock' || userChoice === 'Paper' || userChoice === 'Scissors') {
     showResults();
   }
-  // if(userChoice === 'Rock'){
-  //   if(compChoice === 'Rock'){
-  //     tie();
-  //   }
-  //   if(compChoice === 'Paper'){
-  //     lose();
-  //   }
-  //   if(compChoice === 'Scissors') {
-  //     win();
-  //   }
-  // }
-  // if(userChoice === 'Paper'){
-  //   if(compChoice === 'Rock'){
-  //     win();
-  //   }
-  //   if(compChoice === 'Paper'){
-  //     tie();
-  //   }
-  //   if(compChoice === 'Scissors') {
-  //     lose();
-  //   }
-  // }
-  // if(userChoice === 'Scissors'){
-  //   if(compChoice === 'Rock'){
-  //     lose();
-  //   }
-  //   if(compChoice === 'Paper'){
-  //     win();
-  //   }
-  //   if(compChoice === 'Scissors'){
-  //     tie();
-  //   }
-  // }
 }
 
 function handlePlayAgain(event) {
@@ -242,6 +258,7 @@ function handlePlayAgain(event) {
     return;
   }
 }
+
 
 gameDiv.addEventListener('click', handleRps);
 rounds.addEventListener('click', handlePlayAgain);
