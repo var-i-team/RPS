@@ -166,13 +166,13 @@ body form {
   height: 175px;
   overflow: auto;
   padding-bottom: 154px;
-  
+
 }
 
 #rounds {
   display: block;
   margin: 10px auto;
-  width: 600px;
+  width: 500px;
   height: 60px;
   text-align: center;
   line-height: 30px;
@@ -180,19 +180,13 @@ body form {
 }
 
 #play-again {
-  /* display: block; */
   display: none;
-  /* margin: 10px auto;
-  width: 600px;
-  height: 60px; */
   border: 2px solid black;
   text-align: center;
   color: #F4E89F;
   background: #3A7A88;
   border-radius: 6px;
   cursor: crosshair;
-  /* text-align: center;
-  line-height: 30px; */
   transition-property: background;
   transition-duration: .5s;
   transition-timing-function: linear;
