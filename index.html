@@ -21,38 +21,41 @@
     </header>
 
     <main>
-      <section id="results">
-        <h2 id="banner">Plan your throw!</h2>
-      </section>
-
-      <h3 id="total-games">Total Games: 0</h3>
-      <h3 id="win">Times Won: 0</h3>
-      <h3 id="lose">Times Lost: 0</h3>
-
-      <div id="rps">
-        <img src="img/Rock.jpg" title="Rock" alt="Rock">
-        <img src="img/Paper.jpg" title="Paper" alt="Paper">
-        <img src="img/Scissors.jpg" title="Scissors" alt="Scissors">
-      </div>
-      
-      <div id="canvas">
-        <canvas id="delay-canvas" width="200" height="200" ></canvas>
+      <div id="form">
+        <form>
+          <fieldset>
+            <legend>Enter your name</legend>
+            <label for="name">Name:</label>
+            <input name="name" type="text" size="15" required/>
+            <button type="submit">Click to continue</button>
+          </fieldset>
+        </form>
       </div>
 
-      <div id="rounds">
-        <p id="best-of">Best of 3</p>
-        <p id="play-again">To make it best of 3 choose your next move,<br> or click here to start a new game!</p>
-      </div>
+      <div id="game">
+        <section id="results">
+          <h2 id="banner">Plan your throw!</h2>
+        </section>
 
-      <form>
-        <fieldset>
-          <legend class="name-field">Enter your name</legend>
-          <label class="name-field" for="name">Name:</label>
-          <input class="name-field" name="name" type="text" size="15" required/>
-          <button class="name-field" type="submit">Click to continue</button>
-        </fieldset>
-      </form>
-      <!-- <canvas></canvas> -->
+        <h3 id="total-games">Total Games: 0</h3>
+        <h3 id="win">Times Won: 0</h3>
+        <h3 id="lose">Times Lost: 0</h3>
+
+        <div id="rps">
+          <img src="img/Rock.jpg" title="Rock" alt="Rock">
+          <img src="img/Paper.jpg" title="Paper" alt="Paper">
+          <img src="img/Scissors.jpg" title="Scissors" alt="Scissors">
+        </div>
+        
+        <div id="canvas">
+          <canvas id="delay-canvas" width="200" height="200" ></canvas>
+        </div>
+
+        <div id="rounds">
+          <p id="best-of">Best of 3</p>
+          <p id="play-again">To make it best of 3 choose your next move,<br> or click here to start a new game!</p>
+        </div>
+      </div>
     </main>
 
     <footer>
