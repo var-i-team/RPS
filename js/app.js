@@ -16,10 +16,10 @@ var playerRoundWins = 0;
 var compRoundWins = 0;
 
 
-
-
 function handleRps(event){
-
+  
+  // var audio = new Audio('audio/readygo.wav');
+  //   audio.play();
 	var choiceArray = ['Rock', 'Paper', 'Scissors'];
   var userChoice = event.target.alt;
   var compChoice = choiceArray[Math.floor(Math.random() * choiceArray.length)];
@@ -27,10 +27,10 @@ function handleRps(event){
   console.log('Computer\'s choice', compChoice);
 
   function showResults(){
-		banner.hidden = true;
-		gameDiv.style.display = 'none';
-		delayscreen();
-		gameDiv.innerHTML = '';
+    banner.hidden = true;
+    gameDiv.style.display = 'none';
+    delayscreen();
+    gameDiv.innerHTML = '';
     var img = document.createElement('img');
     img.src = `img/${userChoice}.jpg`;
     img.alt = 'Player 1\'s Choice';
@@ -79,34 +79,47 @@ function handleRps(event){
   function win () {
     turnCount++;
     playerRoundWins++;
-		showResults();
-		banner.textContent = 'You Win!';
+    showResults();
+    banner.textContent = 'You Win!';
+    var audio = new Audio('audio/win2.wav');
+    setTimeout(function(){ 
+      audio.play(); }
+    , 3000);
+    
   }
   function lose () {
-		turnCount++;
-		compRoundWins++;
-		showResults();
-		banner.textContent = 'You Lose!';
-	}
+    turnCount++;
+    compRoundWins++;
+    showResults();
+    banner.textContent = 'You Lose!';
+    var audio = new Audio('audio/lose.wav');
+    setTimeout(function(){ 
+      audio.play(); }
+    , 3000);
+  }
 	
-	function tie(){
-		showResults();
-		banner.textContent = 'Tied, try again!';
-	}
+  function tie(){
+    showResults();
+    banner.textContent = 'Tied, try again!';
+    var audio = new Audio('audio/balala.wav');
+    setTimeout(function(){ 
+      audio.play(); }
+    , 3000);
+  }
 
   function gameOver () {
     var savedTotalPlayed = JSON.parse(localStorage.getItem('totalPlayed'));
     savedTotalPlayed++;
     banner.textContent = 'GAME OVER!';
     winLose.hidden = true;
-		winLose.innerHTML = '';
+	  winLose.innerHTML = '';
     if(playerRoundWins > 1){
       totalPlayed++;
-			playerWins++;
-			console.log(totalPlayed);
-			console.log(playerWins);
-      console.log(playerLosses);
-      console.log(savedTotalPlayed);
+		  playerWins++;
+		  // console.log(totalPlayed);
+		  // console.log(playerWins);
+      // console.log(playerLosses);
+      // console.log(savedTotalPlayed);
       timesWon.textContent = `Times Won: ${playerWins}`;
       timesLost.textContent = `Times Lost: ${playerLosses}`;
       totalGames.textContent = `Total Games: ${savedTotalPlayed}`;
@@ -114,30 +127,35 @@ function handleRps(event){
     }
     if(playerRoundWins < 2){
       totalPlayed++;
-			playerLosses++;
-			console.log(totalPlayed);
-			console.log(playerWins);
-      console.log(playerLosses);
-      console.log(savedTotalPlayed);
+	    playerLosses++;
+	    // console.log(totalPlayed);
+	    // console.log(playerWins);
+      // console.log(playerLosses);
+      // console.log(savedTotalPlayed);
       timesWon.textContent = `Times Won: ${playerWins}`;
       timesLost.textContent = `Times Lost: ${playerLosses}`;
       totalGames.textContent = `Total Games: ${savedTotalPlayed}`;
       winLose.textContent = (`You lost ${playerRoundWins} to ${compRoundWins}...`);
     }
-   
+    
     showResults();
+    
     turnCount = 0;
     playerRoundWins = 0;
     compRoundWins = 0; 
+    // var audio = new Audio('audio/mario_failed.wav');
+    // setTimeout(function(){ 
+    //   audio.play(); }
+    // , 8000);
     // saveLocalStorage();
     if(savedTotalPlayed!== null){
-        totalPlayed = savedTotalPlayed;
-        console.log('totalPlayed:', totalPlayed);
-        localStorage.setItem('totalPlayed', JSON.stringify(totalPlayed));
-      } else {
-        totalGames.textContent = `Total Games: ${totalPlayed}`;
-        localStorage.setItem('totalPlayed', JSON.stringify(totalPlayed));
-      }
+      totalPlayed = savedTotalPlayed;
+      console.log('totalPlayed:', totalPlayed);
+      localStorage.setItem('totalPlayed', JSON.stringify(totalPlayed));
+    } else {
+      totalGames.textContent = `Total Games: ${totalPlayed}`;
+      localStorage.setItem('totalPlayed', JSON.stringify(totalPlayed));
+    }
   }
   
 
@@ -184,6 +202,7 @@ function handleRps(event){
 
 }
 
+
 // Canvas element
 
 var cw = delayCanvas.width;
@@ -207,15 +226,16 @@ function drawText(text){
 
 
 function animate(time){
+  
 	tmp_latestTime = time;
-	delayCanvas.style.display = 'block';
+  delayCanvas.style.display = 'block';
+  
   if(time<nextTime){
     requestAnimationFrame(animate);
     return;
   }
   nextTime= time + duration;
   ctx.clearRect(0,0,cw,ch);
-
   drawText(texts[i]);
   i++;
   if(i<texts.length){
@@ -225,7 +245,8 @@ function animate(time){
 	delayCanvas.style.display = 'none';
 	gameDiv.style.display = 'block';
 	banner.style.display = 'block';
-	winLose.hidden = false;
+  winLose.hidden = false;
+ 
 }
 
 
@@ -233,6 +254,7 @@ function delayscreen(){
   i = 0;
   requestAnimationFrame(animate);
 }
+
 
 gameDiv.addEventListener('click', handleRps);
 
