@@ -1,3 +1,4 @@
+
 /* ------------------------ */
 /* HEADER */
 /* ------------------------ */
@@ -155,3 +156,16 @@ footer section {
   text-align: center;
 
 }
+
+#delayCanvas{
+    margin:0 auto;
+    display: none;
+    width: 175px;
+    height: 175px;
+}
+
+form {
+    display: none;
+}
+
+

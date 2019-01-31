@@ -1,4 +1,7 @@
 'use strict';
+var delayCanvas = document.getElementById('delayCanvas');
+var ctx = delayCanvas.getContext('2d');
+
 var gameDiv = document.getElementById('rps');
 var banner = document.getElementById('banner');
 var winLose = document.getElementById('win-lose');
@@ -12,16 +15,20 @@ var turnCount = 0;
 var playerRoundWins = 0;
 var compRoundWins = 0;
 
+
 function handleRps(event){
 
-  var choiceArray = ['Rock', 'Paper', 'Scissors'];
+	var choiceArray = ['Rock', 'Paper', 'Scissors'];
   var userChoice = event.target.alt;
   var compChoice = choiceArray[Math.floor(Math.random() * choiceArray.length)];
-  console.log('Player\'s choice', userChoice);
-  console.log('Computer\'s choice', compChoice);
+  // console.log('Player\'s choice', userChoice);
+  // console.log('Computer\'s choice', compChoice);
 
   function showResults(){
-    gameDiv.innerHTML = '';
+		banner.hidden = true;
+		gameDiv.style.display = 'none';
+		delayscreen();
+		gameDiv.innerHTML = '';
     var img = document.createElement('img');
     img.src = `img/${userChoice}.jpg`;
     img.alt = 'Player 1\'s Choice';
@@ -35,9 +42,15 @@ function handleRps(event){
   }
 
   function showChoices(){
+<<<<<<< HEAD
     gameDiv.innerHTML = '';
     winLose.textContent = '';
     banner.innerHTML = 'Plan your throw!';
+=======
+		gameDiv.innerHTML = '';
+    winLose.hidden = true;
+    banner.innerHTML = 'This is where win/lose/game over goes';
+>>>>>>> 6c0e00b5899c63039ae20023f5041ff3ba98f7b7
     var img = document.createElement('img');
     img.src = 'img/Rock.jpg';
     img.alt = 'Rock';
@@ -53,6 +66,7 @@ function handleRps(event){
     img.alt = 'Scissors';
     img.title = 'Scissors';
     gameDiv.appendChild(img);
+		banner.style.display = 'none';
   }
 
   if(userChoice === 'Player 1\'s Choice' || userChoice === 'Player 2\'s Choice'){
@@ -64,27 +78,29 @@ function handleRps(event){
     return;
   }
 
+
+
   function win () {
     turnCount++;
     playerRoundWins++;
-    banner.textContent = 'You Win!';
-    showResults();
+		showResults();
+		banner.textContent = 'You Win!';
   }
   function lose () {
     turnCount++;
-    compRoundWins++;
-    banner.textContent = 'You Lose!';
-    showResults();
-  }
-  function tie(){
-    banner.textContent = 'Tied, try again!';
-    showResults();
-  }
-
+		showResults();
+		banner.textContent = 'You Lose!';
+	}
+	
+	function tie(){
+		showResults();
+		banner.textContent = 'Tied, try again!';
+	}
+	
   function gameOver () {
     banner.textContent = 'GAME OVER!';
-    winLose.hidden = false;
-    winLose.innerHTML = '';
+    winLose.hidden = true;
+		winLose.innerHTML = '';
     if(playerRoundWins > 1){
       totalPlayed++;
       playerWins++;
@@ -106,6 +122,7 @@ function handleRps(event){
     playerRoundWins = 0;
     compRoundWins = 0;
   }
+  
 
   if(userChoice === 'Rock'){
     if(compChoice === 'Rock'){
@@ -147,6 +164,59 @@ function handleRps(event){
     gameOver();
   }
 
+
+}
+
+// Canvas element
+
+var cw = delayCanvas.width;
+var ch = delayCanvas.height;
+
+var i = 0;
+var texts = ['Rock', 'Paper', 'Scissors', 'Shoot!', ''];
+var nextTime = 0;
+var duration = 700;
+
+var tmp_latestTime = 0;
+
+
+function drawText(text){
+  var px = delayCanvas.width*0.273;
+  ctx.font = px + 'px Baskerville Old Face';
+  ctx.textAlign = 'right';
+  ctx.fillStyle = '#000000';
+  ctx.fillText(text,delayCanvas.width-15,delayCanvas.height * 0.86);
+}
+
+
+function animate(time){
+	tmp_latestTime = time;
+	delayCanvas.style.display = 'block';
+  if(time<nextTime){
+    requestAnimationFrame(animate);
+    return;
+  }
+  nextTime= time + duration;
+  ctx.clearRect(0,0,cw,ch);
+
+  drawText(texts[i]);
+  i++;
+  if(i<texts.length){
+    requestAnimationFrame(animate);
+    return;
+  }
+	delayCanvas.style.display = 'none';
+	gameDiv.style.display = 'block';
+	banner.style.display = 'block';
+	winLose.hidden = false;
+}
+
+
+function delayscreen(){
+  i = 0;
+  requestAnimationFrame(animate);
 }
 
 gameDiv.addEventListener('click', handleRps);
+
+
