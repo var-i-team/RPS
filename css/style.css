@@ -68,6 +68,7 @@ header nav{
 body {
   background-color: #055572;
   color: rgb(169, 227, 250);
+  height: 750px;
   font-family: 'Shadows Into Light', cursive, sans-serif;
   font-size: 24px;
   letter-spacing: 2px;
@@ -111,12 +112,13 @@ body {
 
 #rps {
   display: flex;
-  width: 650px;
+  width: 900px;
+  height: 330px;
   justify-content: center;
   align-items: center;
   margin-left: auto;
   margin-right: auto;
-
+  
 }
 
 #rps img {
@@ -143,15 +145,21 @@ body form {
 
 }
 
-#delayCanvas{
-  margin:0 auto;
+#delayCanvas {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
   display: none;
-  width: 175px;
-  height: 175px;
+  width: 300px;
+  height: 200px;
+  overflow: auto;
+  padding-bottom: 154px;
 }
 
 form {
   display: none;
+
 }
 
 /* ------------------------ */
@@ -159,10 +167,14 @@ form {
 /* ------------------------ */
 
 footer section {
+  position: relative;
+  top: 15px;
   background-color: #99AB99;
   color: black;
-  height: auto;
+  height: 60px;
+  width: 100%;
   display: block;
   text-align: center;
+  border-top: 1px solid #000;
 
 }
