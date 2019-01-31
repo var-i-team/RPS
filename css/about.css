@@ -147,11 +147,27 @@ header {
     height: 250px;
     padding: 10px;
    }
-   .imager{
+
+   #imagel1 {
+    float: left;
+    margin-top: 50px;
+    padding: 8px;
     height: 135px;
     width: 135px;
    }
-   .imagel {
+   
+   #imager2{
+    float: right;
+    margin-top: 50px;
+    padding: 8px;
+   height: 135px;
+   width: 135px;
+  }
+
+  #fuckingpic {
+    float: left;
+    margin-top: 50px;
+    padding: 8px;
     height: 135px;
     width: 135px;
    }
