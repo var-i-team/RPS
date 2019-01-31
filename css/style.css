@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> b8a1c1b57471154c382889b0881cd8b8c2132a9c
 /* ------------------------ */
 /* HEADER */
 /* ------------------------ */
@@ -144,6 +147,17 @@ body form {
 
 }
 
+#delayCanvas{
+  margin:0 auto;
+  display: none;
+  width: 175px;
+  height: 175px;
+}
+
+form {
+  display: none;
+}
+
 /* ------------------------ */
 /* FOOTER */
 /* ------------------------ */
@@ -156,6 +170,7 @@ footer section {
   text-align: center;
 
 }
+<<<<<<< HEAD
 
 #delayCanvas{
     margin:0 auto;
@@ -169,3 +184,5 @@ form {
 }
 
 
+=======
+>>>>>>> b8a1c1b57471154c382889b0881cd8b8c2132a9c
