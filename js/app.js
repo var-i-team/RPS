@@ -1,19 +1,21 @@
 'use strict';
-var delayCanvas = document.getElementById('delayCanvas');
+var delayCanvas = document.getElementById('delay-canvas');
+var canvas = document.getElementById('canvas');
 var ctx = delayCanvas.getContext('2d');
 
 var gameDiv = document.getElementById('rps');
 var banner = document.getElementById('banner');
-var winLose = document.getElementById('win-lose');
+var playAgain = document.getElementById('play-again');
+var bestOf = document.getElementById('best-of');
 var timesWon = document.getElementById('win');
 var timesLost = document.getElementById('lose');
 var totalGames = document.getElementById('total-games');
 var totalPlayed = 0;
 var playerWins = 0;
 var playerLosses = 0;
-var turnCount = 0;
-var playerRoundWins = 0;
-var opponentRoundWins = 0;
+var maxRounds = 3;
+var playerOneRoundWins = 0;
+var playerTwoRoundWins = 0;
 
 function handleRps(event){
 
@@ -23,7 +25,7 @@ function handleRps(event){
 
   function showResults(){
     banner.style.display = 'none';
-    winLose.style.display = 'none';
+    playAgain.style.display = 'none';
     gameDiv.style.display = 'none';
     delayscreen();
     gameDiv.innerHTML = '';
@@ -44,7 +46,9 @@ function handleRps(event){
     gameDiv.innerHTML = '';
     gameDiv.style.display = 'flex';
     banner.style.display = 'flex';
-    winLose.style.display = 'none';
+    bestOf.style.display = 'block';
+    bestOf.textContent = `Best of ${maxRounds}`;
+    playAgain.style.display = 'none';
     var img = document.createElement('img');
     img.src = 'img/Rock.jpg';
     img.alt = 'Rock';
@@ -62,20 +66,13 @@ function handleRps(event){
     gameDiv.appendChild(img);
   }
 
-  if(event.target.id === 'rps' || userChoice === 'Player 1\'s Choice' || userChoice === 'Player 2\'s Choice'){
-    showChoices();
-    return;
-  }
-
   function win () {
-    turnCount++;
-    playerRoundWins++;
+    playerOneRoundWins++;
     showResults();
     banner.textContent = 'You Win!';
   }
   function lose () {
-    turnCount++;
-    opponentRoundWins++;
+    playerTwoRoundWins++;
     showResults();
     banner.textContent = 'You Lose!';
   }
@@ -85,29 +82,24 @@ function handleRps(event){
   }
 
   function gameOver () {
-    winLose.innerHTML = '';
-    if(playerRoundWins > 1){
-      totalPlayed++;
+    banner.innerHTML = '';
+    totalPlayed++;
+    if((playerOneRoundWins * 2) > maxRounds){
       playerWins++;
-      timesWon.textContent = `Times Won: ${playerWins}`;
-      timesLost.textContent = `Times Lost: ${playerLosses}`;
-      totalGames.textContent = `Total Games: ${totalPlayed}`;
-      winLose.textContent = (`You won ${playerRoundWins} to ${opponentRoundWins}!`);
+      banner.textContent = (`You won ${playerOneRoundWins} to ${playerTwoRoundWins}!`);
     }
-    if(playerRoundWins < 2){
-      totalPlayed++;
+    if((playerTwoRoundWins * 2) > maxRounds){
       playerLosses++;
-      timesWon.textContent = `Times Won: ${playerWins}`;
-      timesLost.textContent = `Times Lost: ${playerLosses}`;
-      totalGames.textContent = `Total Games: ${totalPlayed}`;
-      winLose.textContent = (`You lost ${playerRoundWins} to ${opponentRoundWins}...`);
+      banner.textContent = (`You lost ${playerOneRoundWins} to ${playerTwoRoundWins}...`);
     }
-    // showResults();
-    banner.textContent = 'Click to play again!';
-    winLose.style.display = 'flex';
-    turnCount = 0;
-    playerRoundWins = 0;
-    opponentRoundWins = 0;
+    timesWon.textContent = `Times Won: ${playerWins}`;
+    timesLost.textContent = `Times Lost: ${playerLosses}`;
+    totalGames.textContent = `Total Games: ${totalPlayed}`;
+    banner.style.display = 'flex';
+    bestOf.style.display = 'none';
+    playAgain.style.display = 'block';
+    playAgain.textContent = `To make it best of ${(maxRounds + 2)} choose your next move, or click here to start a new game!`;
+
   }
 
   // Canvas element
@@ -132,6 +124,7 @@ function handleRps(event){
 
   function animate(time){
     // tmp_latestTime = time;
+    canvas.style.display = 'flex';
     delayCanvas.style.display = 'block';
     if(time<nextTime){
       requestAnimationFrame(animate);
@@ -146,10 +139,10 @@ function handleRps(event){
       requestAnimationFrame(animate);
       return;
     }
-    delayCanvas.style.display = 'none';
+    canvas.style.display = 'none';
     banner.style.display = 'flex';
     gameDiv.style.display = 'flex';
-    if(playerRoundWins > 1 || opponentRoundWins > 1){
+    if((playerOneRoundWins * 2) > maxRounds || (playerTwoRoundWins * 2) > maxRounds){
       gameOver();
     }
   }
@@ -157,6 +150,22 @@ function handleRps(event){
   function delayscreen(){
     i = 0;
     requestAnimationFrame(animate);
+  }
+
+  if(event.target.id === playAgain) {
+    maxRounds = 3;
+    playerOneRoundWins = 0;
+    playerTwoRoundWins = 0;
+    showChoices();
+    return;
+  }
+
+  if(event.target.id === 'rps' || userChoice === 'Player 1\'s Choice' || userChoice === 'Player 2\'s Choice'){
+    if((playerOneRoundWins * 2) > maxRounds || (playerTwoRoundWins * 2) > maxRounds){
+      maxRounds += 2;
+    }
+    showChoices();
+    return;
   }
 
   if(userChoice === 'Rock'){
@@ -194,7 +203,7 @@ function handleRps(event){
     }
   }
 
-  // if(playerRoundWins > 1 || opponentRoundWins > 1){
+  // if(playerOneRoundWins > 1 || playerTwoRoundWins > 1){
   //   gameOver();
   // }
 
@@ -242,7 +251,7 @@ function handleRps(event){
 //   delayCanvas.style.display = 'none';
 //   banner.style.display = 'flex';
 //   gameDiv.style.display = 'flex';
-//   if(playerRoundWins > 1 || opponentRoundWins > 1){
+//   if(playerOneRoundWins > 1 || playerTwoRoundWins > 1){
 //     gameOver();
 //   }
 // }

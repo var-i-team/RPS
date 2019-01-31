@@ -134,7 +134,7 @@ body {
 }
 
 body form {
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
 
@@ -145,20 +145,62 @@ body form {
 
 }
 
-#delayCanvas {
+#canvas {
+  display: none;
+  width: 900px;
+  height: 330px;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  
+}
+
+#delay-canvas {
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 0 auto;
   display: none;
-  width: 300px;
-  height: 200px;
+  width: 175px;
+  height: 175px;
   overflow: auto;
   padding-bottom: 154px;
+  
 }
 
-form {
+#rounds {
+  display: block;
+  margin: 10px auto;
+  width: 600px;
+  height: 60px;
+  text-align: center;
+  line-height: 30px;
+
+}
+
+#play-again {
+  /* display: block; */
   display: none;
+  /* margin: 10px auto;
+  width: 600px;
+  height: 60px; */
+  border: 2px solid black;
+  text-align: center;
+  color: #F4E89F;
+  background: #3A7A88;
+  border-radius: 6px;
+  cursor: crosshair;
+  /* text-align: center;
+  line-height: 30px; */
+  transition-property: background;
+  transition-duration: .5s;
+  transition-timing-function: linear;
+
+}
+
+#play-again:hover {
+  background: rgb(165, 180, 248);
 
 }
 

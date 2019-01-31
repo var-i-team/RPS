@@ -23,7 +23,6 @@
     <main>
       <section id="results">
         <h2 id="banner">Plan your throw!</h2>
-        <h2 id="win-lose"></h2>
       </section>
 
       <h3 id="total-games">Total Games: 0</h3>
@@ -35,7 +34,15 @@
         <img src="img/Paper.jpg" title="Paper" alt="Paper">
         <img src="img/Scissors.jpg" title="Scissors" alt="Scissors">
       </div>
-      <canvas id="delayCanvas" width="200" height="200" ></canvas>
+      
+      <div id="canvas">
+        <canvas id="delay-canvas" width="200" height="200" ></canvas>
+      </div>
+
+      <div id="rounds">
+        <p id="best-of">Best of 3</p>
+        <p id="play-again">To make it best of 3 choose your next move,<br> or click here to start a new game!</p>
+      </div>
 
       <form>
         <fieldset>
