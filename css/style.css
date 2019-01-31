@@ -6,6 +6,7 @@ header {
   background-color: #10374D;
   height: 150px;
   margin-bottom: 15px;
+
 }
 
 header nav{
@@ -76,6 +77,22 @@ body {
 
 }
 
+body form {
+  text-align: center;
+  width: 500px;
+  margin: 10px auto;
+
+}
+
+#form {
+  display: none;
+}
+
+#game {
+  display: block;
+
+}
+
 #results {
   display: flex;
   justify-content: center;
@@ -133,18 +150,6 @@ body {
 
 }
 
-body form {
-  display: none;
-  justify-content: center;
-  align-items: center;
-
-}
-
-.name-field {
-  display: inline-block;
-
-}
-
 #canvas {
   display: none;
   width: 900px;
@@ -162,10 +167,8 @@ body form {
   align-items: center;
   margin: 0 auto;
   display: none;
-  width: 175px;
-  height: 175px;
   overflow: auto;
-  padding-bottom: 154px;
+  /* padding-bottom: 154px; */
 
 }
 

@@ -1,5 +1,7 @@
 'use strict';
 
+var form = document.getElementById('form');
+var game = document.getElementById('game');
 var gameDiv = document.getElementById('rps');
 var banner = document.getElementById('banner');
 var rounds = document.getElementById('rounds');
@@ -8,11 +10,11 @@ var bestOf = document.getElementById('best-of');
 var timesWon = document.getElementById('win');
 var timesLost = document.getElementById('lose');
 var totalGames = document.getElementById('total-games');
-
 var delayCanvas = document.getElementById('delay-canvas');
 var canvas = document.getElementById('canvas');
 var ctx = delayCanvas.getContext('2d');
 
+var playerName;
 var totalPlayed = 0;
 var playerWins = 0;
 var playerLosses = 0;
@@ -44,6 +46,19 @@ function showChoices(){
   img.alt = 'Scissors';
   img.title = 'Scissors';
   gameDiv.appendChild(img);
+}
+
+function startGame(event) {
+  console.log(event.target);
+  // event.preventDefault();
+
+  if(!event.target.name.value) {
+    return;
+  }
+
+  playerName = event.target.name.value;
+  form.style.display = 'none';
+  game.style.display = 'block';
 }
 
 function handleRps(event) {
@@ -149,11 +164,11 @@ function handleRps(event) {
   }
 
   function drawText(text){
-    var px = delayCanvas.width*0.273;
+    var px = delayCanvas.width * 0.273;
     ctx.font = px + 'px Baskerville Old Face';
     ctx.textAlign = 'right';
     ctx.fillStyle = '#000000';
-    ctx.fillText(text,delayCanvas.width-15,delayCanvas.height * 0.86);
+    ctx.fillText(text, delayCanvas.width-15, delayCanvas.height * 0.86);
   }
 
   function animate(time){
@@ -161,16 +176,16 @@ function handleRps(event) {
     banner.textContent = 'Ready...';
     canvas.style.display = 'flex';
     delayCanvas.style.display = 'block';
-    if(time<nextTime){
+    if(time < nextTime){
       requestAnimationFrame(animate);
       return;
     }
-    nextTime= time + duration;
-    ctx.clearRect(0,0,cw,ch);
+    nextTime = time + duration;
+    ctx.clearRect(0, 0, cw, ch);
 
     drawText(texts[i]);
     i++;
-    if(i<texts.length){
+    if(i < texts.length){
       requestAnimationFrame(animate);
       return;
     }
@@ -259,6 +274,6 @@ function handlePlayAgain(event) {
   }
 }
 
-
+game.addEventListener('submit', startGame);
 gameDiv.addEventListener('click', handleRps);
 rounds.addEventListener('click', handlePlayAgain);
