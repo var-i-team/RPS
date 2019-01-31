@@ -1,54 +1,67 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <link rel="stylesheet" href="css/reset.css" type="text/css"/>
-        <link rel="stylesheet" href="css/style.css" type="text/css"/>
-        <title>RPS</title>
-    </head>
-    <body>
-        <header>
-            <a href="index.html"><img src=" " alt="logo" title="logo"/></a>
-            <nav>
-               <ul>
-                   <li><a href="">Highscore</a></li>
-                   <li><a href="about/about.html">About Us</a></li>
-               </ul>  
-            </nav>
-        </header>
-        <main>
-            <h2 id="banner">This is where win/lose/game over goes</h2>
-            <h2 id="win-lose" hidden=true></h2>
-            <ul>
-                <li id="win">Times Won:</li>
-                <li id="lose">Times Lost:</li>
-                <li id="total-games">Total Games:</li>
-            </ul>
-            <div id="rps">
-                <img src="img/Rock.jpg" title="Rock" alt="Rock">
-                <img src="img/Paper.jpg" title="Paper" alt="Paper">
-                <img src="img/Scissors.jpg" title="Scissors" alt="Scissors">
-            </div>
-            <form>
-                <fieldset>
-                    <legend>Enter your name</legend>
-                    <label for="name">Name:</label>
-                    <input name="name" type="text" size="15" required/>
-                    <button type="submit">Click to continue</button>
-                </fieldset>
-                
-            </form>
-            <canvas id="delayCanvas" width="200" height="200" ></canvas>
-            <!-- <canvas></canvas> -->
-            
 
-        </main>
-        <footer>
-            <section>
-                <h3>RPS</h3>
-                <p>RPS &copy; 2019</p>
-            </section>
-        </footer>
+<html>
+  <head>
+    <link rel="stylesheet" href="css/reset.css" type="text/css"/>
+    <link rel="stylesheet" href="css/style.css" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Yellowtail" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet">
+    <title>RPS</title>
+  </head>
+
+  <body>
+    <header>
+      <nav>
+        <a class="nav-links" id="high-score" href="">Highscore</a>
+        <a href="index.html">
+          <img id="logo" src="img/logo.jpg" alt="logo" title="logo"/>
+        </a>
+        <a class="nav-links" id="about" href="about/about.html">About Us</a> 
+      </nav>
+    </header>
+
+    <main>
+      <section id="results">
+        <h2 id="banner">Plan your throw!</h2>
+      </section>
+
+      <h3 id="total-games">Total Games: 0</h3>
+      <h3 id="win">Times Won: 0</h3>
+      <h3 id="lose">Times Lost: 0</h3>
+
+      <div id="rps">
+        <img src="img/Rock.jpg" title="Rock" alt="Rock">
+        <img src="img/Paper.jpg" title="Paper" alt="Paper">
+        <img src="img/Scissors.jpg" title="Scissors" alt="Scissors">
+      </div>
+      
+      <div id="canvas">
+        <canvas id="delay-canvas" width="200" height="200" ></canvas>
+      </div>
+
+      <div id="rounds">
+        <p id="best-of">Best of 3</p>
+        <p id="play-again">To make it best of 3 choose your next move,<br> or click here to start a new game!</p>
+      </div>
+
+      <form>
+        <fieldset>
+          <legend class="name-field">Enter your name</legend>
+          <label class="name-field" for="name">Name:</label>
+          <input class="name-field" name="name" type="text" size="15" required/>
+          <button class="name-field" type="submit">Click to continue</button>
+        </fieldset>
+      </form>
+      <!-- <canvas></canvas> -->
+    </main>
+
+    <footer>
+      <section>
+        <h3>RPS</h3>
+        <p>RPS &copy; 2019</p>
+      </section>
+    </footer>
     <script src="js/app.js" type="text/javascript"></script>
-    </body>
-    
+  </body>
+  
 </html>
