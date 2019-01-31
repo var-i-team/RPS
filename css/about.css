@@ -75,6 +75,15 @@ header {
     text-shadow: 2px 2px black;
   }
 
+  #aboot{
+    text-align: center;
+    font-size: 46px;
+    font-style: italic;
+    border: 8px groove rgb(52, 48, 85);
+    color: rgb(155, 235, 253);
+    background-color: #10374D;
+    
+  }
   
   /* ------------------------ */
   /* FOOTER */
@@ -97,43 +106,52 @@ header {
   /* about us stuff */
   /* ------------------------ */
 
-/* 
-  #feature-two {
-    background-color: #D63524;
+
+  #van {
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+    border-right: 5px solid black;
+    box-shadow: 10px 5px 5px rgba(15, 0, 68, 0.445);
     margin: 60px 150px 60px 0px;
     height: 250px;
+    padding: 10px;
    }
-   
-   #family {
-    float: left;
-    height: 200px;
-    width: auto;
-   
-   }
-   
-   #chinook {
-    float: right;
-    height: 150px;
-    width: auto;
-   
-   }
-   
-   #feature-three {
-    background-color: #D63524;
+
+   #alex {
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+    border-left: 5px solid black;
+    box-shadow: -10px 5px 5px rgba(15, 0, 68, 0.445);
     margin: 60px 0px 30px 150px;
     height: 250px;
+    padding: 10px;
    }
    
-   #shirt {
-    float: left;
-    height: 200px;
-    width: auto;
-   
+  #rocket {
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+    border-right: 5px solid black;
+    box-shadow: 10px 5px 5px rgba(15, 0, 68, 0.445);
+    margin: 60px 150px 60px 0px;
+    height: 250px;
+    padding: 10px;
    }
-   
-   #fish {
-    float: right;
-    height: 200px;
-    width: auto;
-   
-   } */
+
+  #ian {
+    display: inline-block;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+    border-left: 5px solid black;
+    box-shadow: -10px 5px 5px rgba(15, 0, 68, 0.445);
+    margin: 60px 0px 30px 150px;
+    height: 250px;
+    padding: 10px;
+   }
+   .imager{
+    height: 135px;
+    width: 135px;
+   }
+   .imagel {
+    height: 135px;
+    width: 135px;
+   }
