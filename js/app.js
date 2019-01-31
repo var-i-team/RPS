@@ -18,9 +18,9 @@ var compRoundWins = 0;
 
 function handleRps(event){
   
-  // var audio = new Audio('audio/readygo.wav');
-  //   audio.play();
-	var choiceArray = ['Rock', 'Paper', 'Scissors'];
+  // var audio = new Audio('audio/drum.wav');
+  // audio.play();
+  var choiceArray = ['Rock', 'Paper', 'Scissors'];
   var userChoice = event.target.alt;
   var compChoice = choiceArray[Math.floor(Math.random() * choiceArray.length)];
   console.log('Player\'s choice', userChoice);
@@ -44,7 +44,7 @@ function handleRps(event){
   }
 
   function showChoices(){
-		gameDiv.innerHTML = '';
+    gameDiv.innerHTML = '';
     winLose.hidden = true;
     banner.innerHTML = 'This is where win/lose/game over goes';
     var img = document.createElement('img');
@@ -62,7 +62,7 @@ function handleRps(event){
     img.alt = 'Scissors';
     img.title = 'Scissors';
     gameDiv.appendChild(img);
-		banner.style.display = 'none';
+    banner.style.display = 'none';
   }
 
   if(userChoice === 'Player 1\'s Choice' || userChoice === 'Player 2\'s Choice'){
@@ -112,30 +112,34 @@ function handleRps(event){
     savedTotalPlayed++;
     banner.textContent = 'GAME OVER!';
     winLose.hidden = true;
-	  winLose.innerHTML = '';
+    winLose.innerHTML = '';
+    
+
     if(playerRoundWins > 1){
       totalPlayed++;
 		  playerWins++;
-		  // console.log(totalPlayed);
-		  // console.log(playerWins);
-      // console.log(playerLosses);
-      // console.log(savedTotalPlayed);
       timesWon.textContent = `Times Won: ${playerWins}`;
       timesLost.textContent = `Times Lost: ${playerLosses}`;
       totalGames.textContent = `Total Games: ${savedTotalPlayed}`;
       winLose.textContent = (`You won ${playerRoundWins} to ${compRoundWins}!`);
+      var audio = new Audio('audio/gameover.wav');
+      setTimeout(function(){
+        audio.play();}
+      , 4000);
     }
+
     if(playerRoundWins < 2){
       totalPlayed++;
 	    playerLosses++;
-	    // console.log(totalPlayed);
-	    // console.log(playerWins);
-      // console.log(playerLosses);
-      // console.log(savedTotalPlayed);
       timesWon.textContent = `Times Won: ${playerWins}`;
       timesLost.textContent = `Times Lost: ${playerLosses}`;
       totalGames.textContent = `Total Games: ${savedTotalPlayed}`;
       winLose.textContent = (`You lost ${playerRoundWins} to ${compRoundWins}...`);
+      var audio = new Audio('audio/mario_failed.wav');
+      setTimeout(function(){ 
+        audio.play(); 
+      }
+      , 4000);
     }
     
     showResults();
@@ -143,11 +147,8 @@ function handleRps(event){
     turnCount = 0;
     playerRoundWins = 0;
     compRoundWins = 0; 
-    // var audio = new Audio('audio/mario_failed.wav');
-    // setTimeout(function(){ 
-    //   audio.play(); }
-    // , 8000);
-    // saveLocalStorage();
+    
+    // LocalStorage
     if(savedTotalPlayed!== null){
       totalPlayed = savedTotalPlayed;
       console.log('totalPlayed:', totalPlayed);
@@ -217,6 +218,7 @@ var tmp_latestTime = 0;
 
 
 function drawText(text){
+  
   var px = delayCanvas.width*0.273;
   ctx.font = px + 'px Baskerville Old Face';
   ctx.textAlign = 'right';
@@ -252,6 +254,8 @@ function animate(time){
 
 function delayscreen(){
   i = 0;
+  var audio = new Audio('audio/drum.wav');
+  audio.play();
   requestAnimationFrame(animate);
 }
 
