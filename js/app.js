@@ -15,7 +15,7 @@ var turnCount = 0;
 var playerRoundWins = 0;
 var compRoundWins = 0;
 
-var savedTotalPlayed = JSON.parse(localStorage.getItem('totalPlayed'));
+
 
 
 function handleRps(event){
@@ -93,8 +93,10 @@ function handleRps(event){
 		showResults();
 		banner.textContent = 'Tied, try again!';
 	}
-	
+
   function gameOver () {
+    var savedTotalPlayed = JSON.parse(localStorage.getItem('totalPlayed'));
+    savedTotalPlayed++;
     banner.textContent = 'GAME OVER!';
     winLose.hidden = true;
 		winLose.innerHTML = '';
@@ -103,10 +105,11 @@ function handleRps(event){
 			playerWins++;
 			console.log(totalPlayed);
 			console.log(playerWins);
-			console.log(playerLosses);
+      console.log(playerLosses);
+      console.log(savedTotalPlayed);
       timesWon.textContent = `Times Won: ${playerWins}`;
       timesLost.textContent = `Times Lost: ${playerLosses}`;
-      totalGames.textContent = `Total Games: ${totalPlayed}`;
+      totalGames.textContent = `Total Games: ${savedTotalPlayed}`;
       winLose.textContent = (`You won ${playerRoundWins} to ${compRoundWins}!`);
     }
     if(playerRoundWins < 2){
@@ -114,17 +117,27 @@ function handleRps(event){
 			playerLosses++;
 			console.log(totalPlayed);
 			console.log(playerWins);
-			console.log(playerLosses);
+      console.log(playerLosses);
+      console.log(savedTotalPlayed);
       timesWon.textContent = `Times Won: ${playerWins}`;
       timesLost.textContent = `Times Lost: ${playerLosses}`;
-      totalGames.textContent = `Total Games: ${totalPlayed}`;
+      totalGames.textContent = `Total Games: ${savedTotalPlayed}`;
       winLose.textContent = (`You lost ${playerRoundWins} to ${compRoundWins}...`);
     }
+   
     showResults();
     turnCount = 0;
     playerRoundWins = 0;
-    compRoundWins = 0;
-    localStorage.setItem('totalPlayed', JSON.stringify(totalPlayed));
+    compRoundWins = 0; 
+    // saveLocalStorage();
+    if(savedTotalPlayed!== null){
+        totalPlayed = savedTotalPlayed;
+        console.log('totalPlayed:', totalPlayed);
+        localStorage.setItem('totalPlayed', JSON.stringify(totalPlayed));
+      } else {
+        totalGames.textContent = `Total Games: ${totalPlayed}`;
+        localStorage.setItem('totalPlayed', JSON.stringify(totalPlayed));
+      }
   }
   
 
