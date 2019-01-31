@@ -34,12 +34,14 @@
 
       <div id="game">
         <section id="results">
-          <h2 id="banner">Plan your throw!</h2>
+          <h2 id="banner"></h2>
         </section>
 
-        <h3 id="total-games">Total Games: 0</h3>
-        <h3 id="win">Times Won: 0</h3>
-        <h3 id="lose">Times Lost: 0</h3>
+        <section id="totals">
+          <h3 id="total-wins">Total Wins: 0</h3>
+          <h3 id="total-games">Total Games: 0</h3>
+          <h3 id="total-loses">Total Loses: 0</h3>
+        </section>
 
         <div id="rps">
           <img src="img/Rock.jpg" title="Rock" alt="Rock">
@@ -50,6 +52,10 @@
         <div id="canvas">
           <canvas id="delay-canvas" width="200" height="200" ></canvas>
         </div>
+
+        <h3 id="current-wins">Current Round Wins: 0</h3>
+        <h3 id="current-loses">Curren Round Loses: 0</h3>
+
 
         <div id="rounds">
           <p id="best-of">Best of 3</p>

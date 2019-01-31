@@ -7,9 +7,11 @@ var banner = document.getElementById('banner');
 var rounds = document.getElementById('rounds');
 var playAgain = document.getElementById('play-again');
 var bestOf = document.getElementById('best-of');
-var timesWon = document.getElementById('win');
-var timesLost = document.getElementById('lose');
+var totalWins = document.getElementById('total-wins');
+var totalLoses = document.getElementById('total-loses');
 var totalGames = document.getElementById('total-games');
+var roundWins = document.getElementById('current-wins');
+var roundLoses = document.getElementById('current-loses');
 var delayCanvas = document.getElementById('delay-canvas');
 var canvas = document.getElementById('canvas');
 var ctx = delayCanvas.getContext('2d');
@@ -18,13 +20,14 @@ var playerName;
 var totalPlayed = 0;
 var playerWins = 0;
 var playerLosses = 0;
+var savedTotalPlayed;
 
 var maxRounds = 3;
 var playerOneRoundWins = 0;
 var playerTwoRoundWins = 0;
 
 function showChoices(){
-  banner.innerHTML = 'Plan your throw!';
+  banner.innerHTML = `${playerName}, plan your throw !`;
   gameDiv.innerHTML = '';
   gameDiv.style.display = 'flex';
   banner.style.display = 'flex';
@@ -48,19 +51,6 @@ function showChoices(){
   gameDiv.appendChild(img);
 }
 
-function startGame(event) {
-  console.log(event.target);
-  // event.preventDefault();
-
-  if(!event.target.name.value) {
-    return;
-  }
-
-  playerName = event.target.name.value;
-  form.style.display = 'none';
-  game.style.display = 'block';
-}
-
 function handleRps(event) {
   var choiceArray = ['Rock', 'Paper', 'Scissors'];
   var userChoice = event.target.alt;
@@ -77,7 +67,6 @@ function handleRps(event) {
   function showResults(){
     banner.style.display = 'none';
     playAgain.style.display = 'none';
-
     gameDiv.style.display = 'none';
     delayscreen();
     gameDiv.innerHTML = '';
@@ -95,29 +84,20 @@ function handleRps(event) {
 
   function win () {
     playerOneRoundWins++;
-    banner.textContent = 'You Win!';
-        var audio = new Audio('audio/win2.wav');
-    setTimeout(function(){ 
-      audio.play(); }
-    , 3000);
-
+    banner.textContent = `${playerName} WINS !`;
+    var audio = new Audio('audio/win2.wav');
+    audio.play();
   }
   function lose () {
     playerTwoRoundWins++;
-    banner.textContent = 'You Lose!';
-        var audio = new Audio('audio/lose.wav');
-    setTimeout(function(){ 
-      audio.play(); }
-    , 3000);
-
+    banner.textContent = `${playerName} loses...`;
+    var audio = new Audio('audio/lose.wav');
+    audio.play();
   }
   function tie(){
-    banner.textContent = 'Tied, try again!';
-        var audio = new Audio('audio/balala.wav');
-    setTimeout(function(){ 
-      audio.play(); }
-    , 3000);
-
+    banner.textContent = 'Tie ! Go again !';
+    var audio = new Audio('audio/balala.wav');
+    audio.play();
   }
 
   function gameOver () {
@@ -125,46 +105,26 @@ function handleRps(event) {
     banner.style.display = 'flex';
     bestOf.style.display = 'none';
     playAgain.style.display = 'block';
-    playAgain.textContent = `To make it best of ${(maxRounds + 2)} choose your next move, or click here to start a new game!`;
+    playAgain.textContent = `To make it best of ${(maxRounds + 2)} choose your next move, or click here to start a new game !`;
     if((playerOneRoundWins * 2) > maxRounds){
-      banner.textContent = (`You won ${playerOneRoundWins} to ${playerTwoRoundWins}!`);
-            winLose.textContent = (`You won ${playerRoundWins} to ${compRoundWins}!`);
+      banner.textContent = (`${playerName} won ${playerOneRoundWins} to ${playerTwoRoundWins} !`);
       var audio = new Audio('audio/gameover.wav');
       setTimeout(function(){
         audio.play();}
       , 4000);
-
     }
     if((playerTwoRoundWins * 2) > maxRounds){
-      banner.textContent = (`You lost ${playerOneRoundWins} to ${playerTwoRoundWins}...`);
-            var audio = new Audio('audio/mario_failed.wav');
-      setTimeout(function(){ 
-        audio.play(); 
+      banner.textContent = (`${playerName} lost ${playerOneRoundWins} to ${playerTwoRoundWins}...`);
+      audio = new Audio('audio/mario_failed.wav');
+      setTimeout(function(){
+        audio.play();
       }
       , 4000);
-
-    }
-
-    
-    showResults();
-    
-    turnCount = 0;
-    playerRoundWins = 0;
-    compRoundWins = 0; 
-    
-    // LocalStorage
-    if(savedTotalPlayed!== null){
-      totalPlayed = savedTotalPlayed;
-      console.log('totalPlayed:', totalPlayed);
-      localStorage.setItem('totalPlayed', JSON.stringify(totalPlayed));
-    } else {
-      totalGames.textContent = `Total Games: ${totalPlayed}`;
-      localStorage.setItem('totalPlayed', JSON.stringify(totalPlayed));
     }
   }
 
   function drawText(text){
-    var px = delayCanvas.width * 0.273;
+    var px = delayCanvas.width * 0.26;
     ctx.font = px + 'px Baskerville Old Face';
     ctx.textAlign = 'right';
     ctx.fillStyle = '#000000';
@@ -227,6 +187,9 @@ function handleRps(event) {
       }
     }
 
+    roundWins.textContent = `Current Round Wins: ${playerOneRoundWins}`;
+    roundLoses.textContent = `Current Round Loses: ${playerTwoRoundWins}`;
+
     if((playerOneRoundWins * 2) > maxRounds || (playerTwoRoundWins * 2) > maxRounds){
       gameOver();
     }
@@ -234,9 +197,8 @@ function handleRps(event) {
 
   function delayscreen(){
     i = 0;
-      var audio = new Audio('audio/drum.wav');
-  audio.play();
-
+    var audio = new Audio('audio/drum.wav');
+    audio.play();
     requestAnimationFrame(animate);
   }
 
@@ -263,17 +225,42 @@ function handlePlayAgain(event) {
     if((playerTwoRoundWins * 2) > maxRounds){
       playerLosses++;
     }
-    timesWon.textContent = `Times Won: ${playerWins}`;
-    timesLost.textContent = `Times Lost: ${playerLosses}`;
+    totalWins.textContent = `Total Wins: ${playerWins}`;
+    totalLoses.textContent = `Total Loses: ${playerLosses}`;
     totalGames.textContent = `Total Games: ${totalPlayed}`;
     maxRounds = 3;
     playerOneRoundWins = 0;
     playerTwoRoundWins = 0;
+
+    // LocalStorage
+    if(savedTotalPlayed!== null){
+      totalPlayed = savedTotalPlayed;
+      console.log('totalPlayed:', totalPlayed);
+      localStorage.setItem('totalPlayed', JSON.stringify(totalPlayed));
+    } else {
+      totalGames.textContent = `Total Games: ${totalPlayed}`;
+      localStorage.setItem('totalPlayed', JSON.stringify(totalPlayed));
+    }
+
     showChoices();
     return;
   }
 }
 
-game.addEventListener('submit', startGame);
+function startGame(event) {
+  console.log(event.target);
+  event.preventDefault();
+
+  if(event.target.name.value === null) {
+    return;
+  }
+
+  playerName = event.target.name.value;
+  banner.innerHTML = `${playerName}, plan your throw !`;
+  form.style.display = 'none';
+  game.style.display = 'block';
+}
+
+form.addEventListener('submit', startGame);
 gameDiv.addEventListener('click', handleRps);
 rounds.addEventListener('click', handlePlayAgain);
