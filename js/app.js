@@ -20,11 +20,13 @@ var playerName;
 var totalPlayed = 0;
 var playerWins = 0;
 var playerLosses = 0;
-var savedTotalPlayed;
+
+var savedTotalPlayed = 0;
 
 var maxRounds = 3;
 var playerOneRoundWins = 0;
 var playerTwoRoundWins = 0;
+
 
 function showChoices(){
   banner.innerHTML = `${playerName}, plan your throw !`;
@@ -49,6 +51,17 @@ function showChoices(){
   img.alt = 'Scissors';
   img.title = 'Scissors';
   gameDiv.appendChild(img);
+}
+
+function letMeWin(given){
+  if(given === 'Rock'){
+    return 'Scissors';
+  }else if(given === 'Paper'){
+    return 'Rock';
+  }else{
+    return 'Paper';
+  }
+
 }
 
 function handleRps(event) {
@@ -114,17 +127,12 @@ function handleRps(event) {
     if((playerOneRoundWins * 2) > maxRounds){
       banner.textContent = (`${playerName} won ${playerOneRoundWins} to ${playerTwoRoundWins} !`);
       var audio = new Audio('audio/gameover.wav');
-      setTimeout(function(){
-        audio.play();}
-      , 4000);
+      audio.play();
     }
     if((playerTwoRoundWins * 2) > maxRounds){
       banner.textContent = (`${playerName} lost ${playerOneRoundWins} to ${playerTwoRoundWins}...`);
       audio = new Audio('audio/mario_failed.wav');
-      setTimeout(function(){
-        audio.play();
-      }
-      , 4000);
+      audio.play();
     }
   }
 
@@ -241,16 +249,7 @@ function handlePlayAgain(event) {
     roundWins.textContent = `Current Round Wins: ${playerOneRoundWins}`;
     roundLoses.textContent = `Current Round Loses: ${playerTwoRoundWins}`;
 
-    // LocalStorage
-    if(savedTotalPlayed!== null){
-      totalPlayed = savedTotalPlayed;
-      console.log('totalPlayed:', totalPlayed);
-      localStorage.setItem('totalPlayed', JSON.stringify(totalPlayed));
-    } else {
-      totalGames.textContent = `Total Games: ${totalPlayed}`;
-      localStorage.setItem('totalPlayed', JSON.stringify(totalPlayed));
-    }
-
+    localStorage.setItem(playerName, JSON.stringify(playerWins + "_" + playerLosses + "_" + totalPlayed));
     showChoices();
     return;
   }
@@ -268,6 +267,18 @@ function startGame(event) {
   banner.innerHTML = `${playerName}, plan your throw !`;
   form.style.display = 'none';
   game.style.display = 'block';
+
+  var cachedPlayerData = localStorage.getItem(playerName);
+  if(cachedPlayerData !== null){
+    var tmpPlayerDataArray = cachedPlayerData.replace("\"","").split("_");
+    playerWins = parseInt(tmpPlayerDataArray[0]);
+    playerLosses = parseInt(tmpPlayerDataArray[1]);
+    totalPlayed = parseInt(tmpPlayerDataArray[2]);
+    totalWins.textContent = `Total Wins: ${playerWins}`;
+    totalLoses.textContent = `Total Loses: ${playerLosses}`;
+    totalGames.textContent = `Total Games: ${totalPlayed}`;
+  }
+
 }
 
 roundWins.textContent = `Current Round Wins: ${playerOneRoundWins}`;
