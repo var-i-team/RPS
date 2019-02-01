@@ -20,11 +20,13 @@ var playerName;
 var totalPlayed = 0;
 var playerWins = 0;
 var playerLosses = 0;
-var savedTotalPlayed;
+
+var savedTotalPlayed = 0;
 
 var maxRounds = 3;
 var playerOneRoundWins = 0;
 var playerTwoRoundWins = 0;
+
 
 function showChoices(){
   banner.innerHTML = `${playerName}, plan your throw !`;
@@ -51,13 +53,24 @@ function showChoices(){
   gameDiv.appendChild(img);
 }
 
+function letMeWin(given){
+  if(given === 'Rock'){
+    return 'Scissors';
+  }else if(given === 'Paper'){
+    return 'Rock';
+  }else{
+    return 'Paper';
+  }
+
+}
+
 function handleRps(event) {
   var choiceArray = ['Rock', 'Paper', 'Scissors'];
   var userChoice = event.target.alt;
   var compChoice = choiceArray[Math.floor(Math.random() * choiceArray.length)];
 
-  var cw = delayCanvas.width;
-  var ch = delayCanvas.height;
+  var canvasWidth = delayCanvas.width;
+  var canvasHeight = delayCanvas.height;
 
   var i = 0;
   var texts = ['Rock', 'Paper', 'Scissors', 'Shoot!', ''];
@@ -74,6 +87,11 @@ function handleRps(event) {
     img.src = `img/${userChoice}.jpg`;
     img.alt = 'Player 1\'s Choice';
     img.title = 'Player 1\'s Choice';
+    gameDiv.appendChild(img);
+    img = document.createElement('img');
+    img.src = 'img/VS.jpg';
+    img.alt = 'VS';
+    img.title = 'VS';
     gameDiv.appendChild(img);
     img = document.createElement('img');
     img.src = `img/${compChoice}.jpg`;
@@ -109,26 +127,23 @@ function handleRps(event) {
     if((playerOneRoundWins * 2) > maxRounds){
       banner.textContent = (`${playerName} won ${playerOneRoundWins} to ${playerTwoRoundWins} !`);
       var audio = new Audio('audio/gameover.wav');
-      setTimeout(function(){
-        audio.play();}
-      , 4000);
+      audio.play();
     }
     if((playerTwoRoundWins * 2) > maxRounds){
       banner.textContent = (`${playerName} lost ${playerOneRoundWins} to ${playerTwoRoundWins}...`);
       audio = new Audio('audio/mario_failed.wav');
-      setTimeout(function(){
-        audio.play();
-      }
-      , 4000);
+      audio.play();
     }
   }
 
   function drawText(text){
     var px = delayCanvas.width * 0.26;
-    ctx.font = px + 'px Baskerville Old Face';
+    ctx.fillStyle = '#99AB99';
+    ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+    ctx.font = px + 'px \'Yellowtail\', cursive, sans-serif';
     ctx.textAlign = 'right';
     ctx.fillStyle = '#000000';
-    ctx.fillText(text, delayCanvas.width-15, delayCanvas.height * 0.86);
+    ctx.fillText(text, delayCanvas.width - 15, delayCanvas.height * 0.86);
   }
 
   function animate(time){
@@ -141,7 +156,7 @@ function handleRps(event) {
       return;
     }
     nextTime = time + duration;
-    ctx.clearRect(0, 0, cw, ch);
+    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 
     drawText(texts[i]);
     i++;
@@ -202,7 +217,7 @@ function handleRps(event) {
     requestAnimationFrame(animate);
   }
 
-  if(event.target.id === 'rps' || userChoice === 'Player 1\'s Choice' || userChoice === 'Player 2\'s Choice'){
+  if(event.target.id === 'rps' || userChoice === 'Player 1\'s Choice' ||userChoice === 'VS' || userChoice === 'Player 2\'s Choice'){
     if((playerOneRoundWins * 2) > maxRounds || (playerTwoRoundWins * 2) > maxRounds){
       maxRounds += 2;
     }
@@ -231,17 +246,10 @@ function handlePlayAgain(event) {
     maxRounds = 3;
     playerOneRoundWins = 0;
     playerTwoRoundWins = 0;
+    roundWins.textContent = `Current Round Wins: ${playerOneRoundWins}`;
+    roundLoses.textContent = `Current Round Loses: ${playerTwoRoundWins}`;
 
-    // LocalStorage
-    if(savedTotalPlayed!== null){
-      totalPlayed = savedTotalPlayed;
-      console.log('totalPlayed:', totalPlayed);
-      localStorage.setItem('totalPlayed', JSON.stringify(totalPlayed));
-    } else {
-      totalGames.textContent = `Total Games: ${totalPlayed}`;
-      localStorage.setItem('totalPlayed', JSON.stringify(totalPlayed));
-    }
-
+    localStorage.setItem(playerName, JSON.stringify(playerWins + "_" + playerLosses));
     showChoices();
     return;
   }
@@ -259,7 +267,22 @@ function startGame(event) {
   banner.innerHTML = `${playerName}, plan your throw !`;
   form.style.display = 'none';
   game.style.display = 'block';
+
+  var cachedPlayerData = localStorage.getItem(playerName);
+  if(cachedPlayerData !== null){
+    var tmpPlayerDataArray = cachedPlayerData.replace("\"","").split("_");
+    playerWins = parseInt(tmpPlayerDataArray[0]);
+    playerLosses = parseInt(tmpPlayerDataArray[1]);
+    totalPlayed = playerWins + playerLosses;
+    totalWins.textContent = `Total Wins: ${playerWins}`;
+    totalLoses.textContent = `Total Loses: ${playerLosses}`;
+    totalGames.textContent = `Total Games: ${totalPlayed}`;
+  }
+
 }
+
+roundWins.textContent = `Current Round Wins: ${playerOneRoundWins}`;
+roundLoses.textContent = `Current Round Loses: ${playerTwoRoundWins}`;
 
 form.addEventListener('submit', startGame);
 gameDiv.addEventListener('click', handleRps);
