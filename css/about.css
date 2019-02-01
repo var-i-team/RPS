@@ -151,7 +151,7 @@ footer section {
   float: left;
   margin-top: 70px;
   padding-left: 8px;
-  height: 135px;
+  height: auto;
   width: 135px;
   }
 
@@ -165,15 +165,15 @@ footer section {
 
 #imager1{
   float: right;
-  margin-top: 125px;
+  margin-top: 115px;
   padding: 8px;
-  height: 135px;
-  width: 135px;
+  height: auto;
+  width: 130px;
 }
   
 #imager2{
   float: right;
-  margin-top: 125px;
+  margin-top: 100px;
   padding: 8px;
   height: 135px;
   width: 135px;
