@@ -119,7 +119,7 @@ function handleRps(event) {
     banner.style.display = 'flex';
     bestOf.style.display = 'none';
     playAgain.style.display = 'block';
-    playAgain.textContent = `To make it best of ${(maxRounds + 2)} choose your next move, or click here to start a new game !`;
+    playAgain.textContent = `To make it best of ${(maxRounds + 2)} choose your next move, or click here to save your score and start a new game !`;
     if((playerOneRoundWins * 2) > maxRounds){
       banner.textContent = (`${playerName} won ${playerOneRoundWins} to ${playerTwoRoundWins} !`);
       var audio = new Audio('audio/gameover.wav');
