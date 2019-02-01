@@ -249,7 +249,7 @@ function handlePlayAgain(event) {
     roundWins.textContent = `Current Round Wins: ${playerOneRoundWins}`;
     roundLoses.textContent = `Current Round Loses: ${playerTwoRoundWins}`;
 
-    localStorage.setItem(playerName, JSON.stringify(playerWins + "_" + playerLosses + "_" + totalPlayed));
+    localStorage.setItem(playerName, JSON.stringify(playerWins + "_" + playerLosses));
     showChoices();
     return;
   }
@@ -273,7 +273,7 @@ function startGame(event) {
     var tmpPlayerDataArray = cachedPlayerData.replace("\"","").split("_");
     playerWins = parseInt(tmpPlayerDataArray[0]);
     playerLosses = parseInt(tmpPlayerDataArray[1]);
-    totalPlayed = parseInt(tmpPlayerDataArray[2]);
+    totalPlayed = playerWins + playerLosses;
     totalWins.textContent = `Total Wins: ${playerWins}`;
     totalLoses.textContent = `Total Loses: ${playerLosses}`;
     totalGames.textContent = `Total Games: ${totalPlayed}`;
