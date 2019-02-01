@@ -70,6 +70,7 @@ function letMeWin(given){
 function handleRps(event) {
   var playerOneChoice = event.target.alt;
   var playerTwoChoice = rpsChoices[Math.floor(Math.random() * rpsChoices.length)].name;
+
   var canvasWidth = delayCanvas.width;
   var canvasHeight = delayCanvas.height;
   var i = 0;
@@ -176,7 +177,6 @@ function handleRps(event) {
 
     if(playerOneChoice === playerTwoChoice) {
       tie();
-      console.log('tie');
     }
 
     for(var j = 0; j < rpsChoices.length; j++) {
