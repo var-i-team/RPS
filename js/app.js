@@ -56,8 +56,8 @@ function handleRps(event) {
   var userChoice = event.target.alt;
   var compChoice = choiceArray[Math.floor(Math.random() * choiceArray.length)];
 
-  var cw = delayCanvas.width;
-  var ch = delayCanvas.height;
+  var canvasWidth = delayCanvas.width;
+  var canvasHeight = delayCanvas.height;
 
   var i = 0;
   var texts = ['Rock', 'Paper', 'Scissors', 'Shoot!', ''];
@@ -74,6 +74,11 @@ function handleRps(event) {
     img.src = `img/${userChoice}.jpg`;
     img.alt = 'Player 1\'s Choice';
     img.title = 'Player 1\'s Choice';
+    gameDiv.appendChild(img);
+    img = document.createElement('img');
+    img.src = 'img/VS.jpg';
+    img.alt = 'VS';
+    img.title = 'VS';
     gameDiv.appendChild(img);
     img = document.createElement('img');
     img.src = `img/${compChoice}.jpg`;
@@ -125,10 +130,12 @@ function handleRps(event) {
 
   function drawText(text){
     var px = delayCanvas.width * 0.26;
-    ctx.font = px + 'px Baskerville Old Face';
+    ctx.fillStyle = '#99AB99';
+    ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+    ctx.font = px + 'px \'Yellowtail\', cursive, sans-serif';
     ctx.textAlign = 'right';
     ctx.fillStyle = '#000000';
-    ctx.fillText(text, delayCanvas.width-15, delayCanvas.height * 0.86);
+    ctx.fillText(text, delayCanvas.width - 15, delayCanvas.height * 0.86);
   }
 
   function animate(time){
@@ -141,7 +148,7 @@ function handleRps(event) {
       return;
     }
     nextTime = time + duration;
-    ctx.clearRect(0, 0, cw, ch);
+    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 
     drawText(texts[i]);
     i++;
@@ -202,7 +209,7 @@ function handleRps(event) {
     requestAnimationFrame(animate);
   }
 
-  if(event.target.id === 'rps' || userChoice === 'Player 1\'s Choice' || userChoice === 'Player 2\'s Choice'){
+  if(event.target.id === 'rps' || userChoice === 'Player 1\'s Choice' ||userChoice === 'VS' || userChoice === 'Player 2\'s Choice'){
     if((playerOneRoundWins * 2) > maxRounds || (playerTwoRoundWins * 2) > maxRounds){
       maxRounds += 2;
     }
@@ -231,6 +238,8 @@ function handlePlayAgain(event) {
     maxRounds = 3;
     playerOneRoundWins = 0;
     playerTwoRoundWins = 0;
+    roundWins.textContent = `Current Round Wins: ${playerOneRoundWins}`;
+    roundLoses.textContent = `Current Round Loses: ${playerTwoRoundWins}`;
 
     // LocalStorage
     if(savedTotalPlayed!== null){
@@ -260,6 +269,9 @@ function startGame(event) {
   form.style.display = 'none';
   game.style.display = 'block';
 }
+
+roundWins.textContent = `Current Round Wins: ${playerOneRoundWins}`;
+roundLoses.textContent = `Current Round Loses: ${playerTwoRoundWins}`;
 
 form.addEventListener('submit', startGame);
 gameDiv.addEventListener('click', handleRps);
