@@ -20,8 +20,8 @@ var playerName;
 var totalPlayed = 0;
 var playerWins = 0;
 var playerLosses = 0;
-var savedTotalPlayed;
 var rpsChoices = [];
+var savedTotalPlayed = 0;
 var maxRounds = 3;
 var playerOneRoundWins = 0;
 var playerTwoRoundWins = 0;
@@ -38,6 +38,7 @@ new RPS('Rock', 'Scissors', 'Paper');
 new RPS('Paper', 'Rock', 'Scissors');
 new RPS('Scissors', 'Paper', 'Rock');
 
+
 function showChoices(){
   banner.innerHTML = `${playerName}, plan your throw !`;
   gameDiv.innerHTML = '';
@@ -53,6 +54,17 @@ function showChoices(){
     img.title = rpsChoices[i].name;
     gameDiv.appendChild(img);
   }
+}
+
+function letMeWin(given){
+  if(given === 'Rock'){
+    return 'Scissors';
+  }else if(given === 'Paper'){
+    return 'Rock';
+  }else{
+    return 'Paper';
+  }
+
 }
 
 function handleRps(event) {
@@ -221,16 +233,7 @@ function handlePlayAgain(event) {
     roundWins.textContent = `Current Round Wins: ${playerOneRoundWins}`;
     roundLoses.textContent = `Current Round Loses: ${playerTwoRoundWins}`;
 
-    // LocalStorage
-    if(savedTotalPlayed!== null){
-      totalPlayed = savedTotalPlayed;
-      console.log('totalPlayed:', totalPlayed);
-      localStorage.setItem('totalPlayed', JSON.stringify(totalPlayed));
-    } else {
-      totalGames.textContent = `Total Games: ${totalPlayed}`;
-      localStorage.setItem('totalPlayed', JSON.stringify(totalPlayed));
-    }
-
+    localStorage.setItem(playerName, JSON.stringify(playerWins + "_" + playerLosses));
     showChoices();
     return;
   }
@@ -248,6 +251,18 @@ function startGame(event) {
   banner.innerHTML = `${playerName}, plan your throw !`;
   form.style.display = 'none';
   game.style.display = 'block';
+
+  var cachedPlayerData = localStorage.getItem(playerName);
+  if(cachedPlayerData !== null){
+    var tmpPlayerDataArray = cachedPlayerData.replace("\"","").split("_");
+    playerWins = parseInt(tmpPlayerDataArray[0]);
+    playerLosses = parseInt(tmpPlayerDataArray[1]);
+    totalPlayed = playerWins + playerLosses;
+    totalWins.textContent = `Total Wins: ${playerWins}`;
+    totalLoses.textContent = `Total Loses: ${playerLosses}`;
+    totalGames.textContent = `Total Games: ${totalPlayed}`;
+  }
+
 }
 
 roundWins.textContent = `Current Round Wins: ${playerOneRoundWins}`;
