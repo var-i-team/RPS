@@ -20,9 +20,6 @@ var playerName;
 var totalPlayed = 0;
 var playerWins = 0;
 var playerLosses = 0;
-
-var savedTotalPlayed = 0;
-
 var maxRounds = 3;
 var playerOneRoundWins = 0;
 var playerTwoRoundWins = 0;
@@ -51,17 +48,6 @@ function showChoices(){
   img.alt = 'Scissors';
   img.title = 'Scissors';
   gameDiv.appendChild(img);
-}
-
-function letMeWin(given){
-  if(given === 'Rock'){
-    return 'Scissors';
-  }else if(given === 'Paper'){
-    return 'Rock';
-  }else{
-    return 'Paper';
-  }
-
 }
 
 function handleRps(event) {
@@ -102,7 +88,7 @@ function handleRps(event) {
 
   function win () {
     playerOneRoundWins++;
-    banner.textContent = `${playerName} WINS !`;
+    banner.textContent = `${playerName.toUpperCase()} WINS ! CLICK TO GO AGAIN !`;
     if((playerOneRoundWins * 2) < maxRounds || (playerTwoRoundWins * 2) < maxRounds){
       var audio = new Audio('audio/win2.wav');
       audio.play();
@@ -110,14 +96,14 @@ function handleRps(event) {
   }
   function lose () {
     playerTwoRoundWins++;
-    banner.textContent = `${playerName} loses...`;
+    banner.textContent = `${playerName} loses... Click to go again...`;
     if((playerOneRoundWins * 2) < maxRounds || (playerTwoRoundWins * 2) < maxRounds){
       var audio = new Audio('audio/lose.wav');
       audio.play();
     }
   }
   function tie(){
-    banner.textContent = 'Tie ! Go again !';
+    banner.textContent = 'Tie ! Click to go again !';
     if((playerOneRoundWins * 2) < maxRounds || (playerTwoRoundWins * 2) < maxRounds){
       var audio = new Audio('audio/balala.wav');
       audio.play();
@@ -250,7 +236,7 @@ function handlePlayAgain(event) {
     roundWins.textContent = `Current Round Wins: ${playerOneRoundWins}`;
     roundLoses.textContent = `Current Round Loses: ${playerTwoRoundWins}`;
 
-    localStorage.setItem(playerName, JSON.stringify(playerWins + "_" + playerLosses));
+    localStorage.setItem(playerName, JSON.stringify(playerWins + '_' + playerLosses));
     showChoices();
     return;
   }
@@ -271,7 +257,7 @@ function startGame(event) {
 
   var cachedPlayerData = localStorage.getItem(playerName);
   if(cachedPlayerData !== null){
-    var tmpPlayerDataArray = cachedPlayerData.replace("\"","").split("_");
+    var tmpPlayerDataArray = cachedPlayerData.replace('"','').split('_');
     playerWins = parseInt(tmpPlayerDataArray[0]);
     playerLosses = parseInt(tmpPlayerDataArray[1]);
     totalPlayed = playerWins + playerLosses;
