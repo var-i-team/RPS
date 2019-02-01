@@ -56,17 +56,6 @@ function showChoices(){
   }
 }
 
-function letMeWin(given){
-  if(given === 'Rock'){
-    return 'Scissors';
-  }else if(given === 'Paper'){
-    return 'Rock';
-  }else{
-    return 'Paper';
-  }
-
-}
-
 function handleRps(event) {
   var playerOneChoice = event.target.alt;
   var playerTwoChoice = rpsChoices[Math.floor(Math.random() * rpsChoices.length)].name;
@@ -103,23 +92,23 @@ function handleRps(event) {
 
   function win () {
     playerOneRoundWins++;
-    banner.textContent = `${playerName} WINS !`;
-    if((playerOneRoundWins * 2) < maxRounds || (playerTwoRoundWins * 2) < maxRounds) {
+    banner.textContent = `${playerName.toUpperCase()} WINS ! CLICK TO GO AGAIN !`;
+    if((playerOneRoundWins * 2) < maxRounds || (playerTwoRoundWins * 2) < maxRounds){
       var audio = new Audio('audio/win2.wav');
       audio.play();
     }
   }
   function lose () {
     playerTwoRoundWins++;
-    banner.textContent = `${playerName} loses...`;
-    if((playerOneRoundWins * 2) < maxRounds || (playerTwoRoundWins * 2) < maxRounds) {
+    banner.textContent = `${playerName} loses... Click to go again...`;
+    if((playerOneRoundWins * 2) < maxRounds || (playerTwoRoundWins * 2) < maxRounds){
       var audio = new Audio('audio/lose.wav');
       audio.play();
     }
   }
-  function tie() {
-    banner.textContent = 'Tie ! Go again !';
-    if((playerOneRoundWins * 2) < maxRounds || (playerTwoRoundWins * 2) < maxRounds) {
+  function tie(){
+    banner.textContent = 'Tie ! Click to go again !';
+    if((playerOneRoundWins * 2) < maxRounds || (playerTwoRoundWins * 2) < maxRounds){
       var audio = new Audio('audio/balala.wav');
       audio.play();
     }
@@ -233,7 +222,7 @@ function handlePlayAgain(event) {
     roundWins.textContent = `Current Round Wins: ${playerOneRoundWins}`;
     roundLoses.textContent = `Current Round Loses: ${playerTwoRoundWins}`;
 
-    localStorage.setItem(playerName, JSON.stringify(playerWins + "_" + playerLosses));
+    localStorage.setItem(playerName, JSON.stringify(playerWins + '_' + playerLosses));
     showChoices();
     return;
   }
@@ -254,7 +243,7 @@ function startGame(event) {
 
   var cachedPlayerData = localStorage.getItem(playerName);
   if(cachedPlayerData !== null){
-    var tmpPlayerDataArray = cachedPlayerData.replace("\"","").split("_");
+    var tmpPlayerDataArray = cachedPlayerData.replace('"','').split('_');
     playerWins = parseInt(tmpPlayerDataArray[0]);
     playerLosses = parseInt(tmpPlayerDataArray[1]);
     totalPlayed = playerWins + playerLosses;
