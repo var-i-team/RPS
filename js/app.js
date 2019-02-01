@@ -21,10 +21,22 @@ var totalPlayed = 0;
 var playerWins = 0;
 var playerLosses = 0;
 var savedTotalPlayed;
-
+var rpsChoices = [];
 var maxRounds = 3;
 var playerOneRoundWins = 0;
 var playerTwoRoundWins = 0;
+
+function RPS(name, beats, losesTo) {
+  this.name = name;
+  this.filepath = `img/${name}.jpg`;
+  this.beats = beats;
+  this.losesTo = losesTo;
+  rpsChoices.push(this);
+}
+
+new RPS('Rock', 'Scissors', 'Paper');
+new RPS('Paper', 'Rock', 'Scissors');
+new RPS('Scissors', 'Paper', 'Rock');
 
 function showChoices(){
   banner.innerHTML = `${playerName}, plan your throw !`;
@@ -34,31 +46,20 @@ function showChoices(){
   bestOf.style.display = 'block';
   bestOf.textContent = `Best of ${maxRounds}`;
   playAgain.style.display = 'none';
-  var img = document.createElement('img');
-  img.src = 'img/Rock.jpg';
-  img.alt = 'Rock';
-  img.title = 'Rock';
-  gameDiv.appendChild(img);
-  img = document.createElement('img');
-  img.src = 'img/Paper.jpg';
-  img.alt = 'Paper';
-  img.title = 'Paper';
-  gameDiv.appendChild(img);
-  img = document.createElement('img');
-  img.src = 'img/Scissors.jpg';
-  img.alt = 'Scissors';
-  img.title = 'Scissors';
-  gameDiv.appendChild(img);
+  for(var i = 0; i < rpsChoices.length; i++){
+    var img = document.createElement('img');
+    img.src = rpsChoices[i].filepath;
+    img.alt = rpsChoices[i].name;
+    img.title = rpsChoices[i].name;
+    gameDiv.appendChild(img);
+  }
 }
 
 function handleRps(event) {
-  var choiceArray = ['Rock', 'Paper', 'Scissors'];
   var playerOneChoice = event.target.alt;
-  var playerTwoChoice = choiceArray[Math.floor(Math.random() * choiceArray.length)];
-
+  var playerTwoChoice = rpsChoices[Math.floor(Math.random() * rpsChoices.length)].name;
   var canvasWidth = delayCanvas.width;
   var canvasHeight = delayCanvas.height;
-
   var i = 0;
   var texts = ['Rock', 'Paper', 'Scissors', 'Shoot!', ''];
   var nextTime = 0;
@@ -90,7 +91,7 @@ function handleRps(event) {
   function win () {
     playerOneRoundWins++;
     banner.textContent = `${playerName} WINS !`;
-    if((playerOneRoundWins * 2) < maxRounds || (playerTwoRoundWins * 2) < maxRounds){
+    if((playerOneRoundWins * 2) < maxRounds || (playerTwoRoundWins * 2) < maxRounds) {
       var audio = new Audio('audio/win2.wav');
       audio.play();
     }
@@ -98,20 +99,20 @@ function handleRps(event) {
   function lose () {
     playerTwoRoundWins++;
     banner.textContent = `${playerName} loses...`;
-    if((playerOneRoundWins * 2) < maxRounds || (playerTwoRoundWins * 2) < maxRounds){
+    if((playerOneRoundWins * 2) < maxRounds || (playerTwoRoundWins * 2) < maxRounds) {
       var audio = new Audio('audio/lose.wav');
       audio.play();
     }
   }
-  function tie(){
+  function tie() {
     banner.textContent = 'Tie ! Go again !';
-    if((playerOneRoundWins * 2) < maxRounds || (playerTwoRoundWins * 2) < maxRounds){
+    if((playerOneRoundWins * 2) < maxRounds || (playerTwoRoundWins * 2) < maxRounds) {
       var audio = new Audio('audio/balala.wav');
       audio.play();
     }
   }
 
-  function gameOver () {
+  function gameOver() {
     banner.innerHTML = '';
     banner.style.display = 'flex';
     bestOf.style.display = 'none';
@@ -163,30 +164,14 @@ function handleRps(event) {
 
     if(playerOneChoice === playerTwoChoice) {
       tie();
+      console.log('tie');
     }
 
-    if(playerOneChoice === 'Rock'){
-      if(playerTwoChoice === 'Paper'){
-        lose();
-      }
-      if(playerTwoChoice === 'Scissors') {
+    for(var j = 0; j < rpsChoices.length; j++) {
+      if(playerOneChoice === rpsChoices[j].name && playerTwoChoice === rpsChoices[j].beats) {
         win();
-      }
-    }
-    if(playerOneChoice === 'Paper'){
-      if(playerTwoChoice === 'Rock'){
-        win();
-      }
-      if(playerTwoChoice === 'Scissors') {
+      } else if(playerOneChoice === rpsChoices[j].name && playerTwoChoice === rpsChoices[j].losesTo) {
         lose();
-      }
-    }
-    if(playerOneChoice === 'Scissors'){
-      if(playerTwoChoice === 'Rock'){
-        lose();
-      }
-      if(playerTwoChoice === 'Paper'){
-        win();
       }
     }
 
@@ -199,7 +184,6 @@ function handleRps(event) {
   }
 
   function delayscreen(){
-    i = 0;
     var audio = new Audio('audio/drum.wav');
     audio.play();
     requestAnimationFrame(animate);
