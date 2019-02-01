@@ -98,7 +98,7 @@ body form {
   justify-content: center;
   align-items: center;
   height: 60px;
-  width: 350px;
+  width: 900  px;
   margin-left: auto;
   margin-right: auto;
 
@@ -135,13 +135,13 @@ body form {
   align-items: center;
   margin-left: auto;
   margin-right: auto;
-  cursor: pointer;
 
 }
 
 #rps img {
   margin: 5px;
   border: 5px groove rgb(131, 0, 0);
+  cursor: pointer;
 
 }
 
@@ -198,7 +198,7 @@ body form {
   color: #F4E89F;
   background: #3A7A88;
   border-radius: 6px;
-  cursor: crosshair;
+  cursor: pointer;
   transition-property: background;
   transition-duration: .5s;
   transition-timing-function: linear;
@@ -207,22 +207,5 @@ body form {
 
 #play-again:hover {
   background: rgb(165, 180, 248);
-
-}
-
-/* ------------------------ */
-/* FOOTER */
-/* ------------------------ */
-
-footer section {
-  position: relative;
-  top: 15px;
-  background-color: #99AB99;
-  color: black;
-  height: 60px;
-  width: 100%;
-  display: block;
-  text-align: center;
-  border-top: 1px solid #000;
 
 }
