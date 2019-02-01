@@ -156,6 +156,13 @@ header {
     width: 135px;
    }
    
+   #imager1{
+    float: right;
+    margin-top: 50px;
+    padding: 8px;
+   height: 135px;
+   width: 135px;
+  }
    #imager2{
     float: right;
     margin-top: 50px;
