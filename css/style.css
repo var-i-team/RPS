@@ -135,13 +135,13 @@ body form {
   align-items: center;
   margin-left: auto;
   margin-right: auto;
-  cursor: pointer;
 
 }
 
 #rps img {
   margin: 5px;
   border: 5px groove rgb(131, 0, 0);
+  cursor: pointer;
 
 }
 

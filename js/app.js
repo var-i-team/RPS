@@ -53,8 +53,8 @@ function showChoices(){
 
 function handleRps(event) {
   var choiceArray = ['Rock', 'Paper', 'Scissors'];
-  var userChoice = event.target.alt;
-  var compChoice = choiceArray[Math.floor(Math.random() * choiceArray.length)];
+  var playerOneChoice = event.target.alt;
+  var playerTwoChoice = choiceArray[Math.floor(Math.random() * choiceArray.length)];
 
   var canvasWidth = delayCanvas.width;
   var canvasHeight = delayCanvas.height;
@@ -71,7 +71,7 @@ function handleRps(event) {
     delayscreen();
     gameDiv.innerHTML = '';
     var img = document.createElement('img');
-    img.src = `img/${userChoice}.jpg`;
+    img.src = `img/${playerOneChoice}.jpg`;
     img.alt = 'Player 1\'s Choice';
     img.title = 'Player 1\'s Choice';
     gameDiv.appendChild(img);
@@ -81,7 +81,7 @@ function handleRps(event) {
     img.title = 'VS';
     gameDiv.appendChild(img);
     img = document.createElement('img');
-    img.src = `img/${compChoice}.jpg`;
+    img.src = `img/${playerTwoChoice}.jpg`;
     img.alt = 'Player 2\'s Choice';
     img.title = 'Player 2\'s Choice';
     gameDiv.appendChild(img);
@@ -90,19 +90,25 @@ function handleRps(event) {
   function win () {
     playerOneRoundWins++;
     banner.textContent = `${playerName} WINS !`;
-    var audio = new Audio('audio/win2.wav');
-    audio.play();
+    if((playerOneRoundWins * 2) < maxRounds || (playerTwoRoundWins * 2) < maxRounds){
+      var audio = new Audio('audio/win2.wav');
+      audio.play();
+    }
   }
   function lose () {
     playerTwoRoundWins++;
     banner.textContent = `${playerName} loses...`;
-    var audio = new Audio('audio/lose.wav');
-    audio.play();
+    if((playerOneRoundWins * 2) < maxRounds || (playerTwoRoundWins * 2) < maxRounds){
+      var audio = new Audio('audio/lose.wav');
+      audio.play();
+    }
   }
   function tie(){
     banner.textContent = 'Tie ! Go again !';
-    var audio = new Audio('audio/balala.wav');
-    audio.play();
+    if((playerOneRoundWins * 2) < maxRounds || (playerTwoRoundWins * 2) < maxRounds){
+      var audio = new Audio('audio/balala.wav');
+      audio.play();
+    }
   }
 
   function gameOver () {
@@ -114,17 +120,12 @@ function handleRps(event) {
     if((playerOneRoundWins * 2) > maxRounds){
       banner.textContent = (`${playerName} won ${playerOneRoundWins} to ${playerTwoRoundWins} !`);
       var audio = new Audio('audio/gameover.wav');
-      setTimeout(function(){
-        audio.play();}
-      , 4000);
+      audio.play();
     }
     if((playerTwoRoundWins * 2) > maxRounds){
       banner.textContent = (`${playerName} lost ${playerOneRoundWins} to ${playerTwoRoundWins}...`);
       audio = new Audio('audio/mario_failed.wav');
-      setTimeout(function(){
-        audio.play();
-      }
-      , 4000);
+      audio.play();
     }
   }
 
@@ -160,37 +161,32 @@ function handleRps(event) {
     banner.style.display = 'flex';
     gameDiv.style.display = 'flex';
 
-    if(userChoice === 'Rock'){
-      if(compChoice === 'Rock'){
-        tie();
-      }
-      if(compChoice === 'Paper'){
+    if(playerOneChoice === playerTwoChoice) {
+      tie();
+    }
+
+    if(playerOneChoice === 'Rock'){
+      if(playerTwoChoice === 'Paper'){
         lose();
       }
-      if(compChoice === 'Scissors') {
+      if(playerTwoChoice === 'Scissors') {
         win();
       }
     }
-    if(userChoice === 'Paper'){
-      if(compChoice === 'Rock'){
+    if(playerOneChoice === 'Paper'){
+      if(playerTwoChoice === 'Rock'){
         win();
       }
-      if(compChoice === 'Paper'){
-        tie();
-      }
-      if(compChoice === 'Scissors') {
+      if(playerTwoChoice === 'Scissors') {
         lose();
       }
     }
-    if(userChoice === 'Scissors'){
-      if(compChoice === 'Rock'){
+    if(playerOneChoice === 'Scissors'){
+      if(playerTwoChoice === 'Rock'){
         lose();
       }
-      if(compChoice === 'Paper'){
+      if(playerTwoChoice === 'Paper'){
         win();
-      }
-      if(compChoice === 'Scissors'){
-        tie();
       }
     }
 
@@ -209,7 +205,7 @@ function handleRps(event) {
     requestAnimationFrame(animate);
   }
 
-  if(event.target.id === 'rps' || userChoice === 'Player 1\'s Choice' ||userChoice === 'VS' || userChoice === 'Player 2\'s Choice'){
+  if(event.target.id === 'rps' || playerOneChoice === 'Player 1\'s Choice' ||playerOneChoice === 'VS' || playerOneChoice === 'Player 2\'s Choice'){
     if((playerOneRoundWins * 2) > maxRounds || (playerTwoRoundWins * 2) > maxRounds){
       maxRounds += 2;
     }
@@ -217,7 +213,7 @@ function handleRps(event) {
     return;
   }
 
-  if(userChoice === 'Rock' || userChoice === 'Paper' || userChoice === 'Scissors') {
+  if(playerOneChoice === 'Rock' || playerOneChoice === 'Paper' || playerOneChoice === 'Scissors') {
     showResults();
   }
 }
