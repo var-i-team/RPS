@@ -3,155 +3,187 @@
 /* ------------------------ */
 
 header {
-    background-color: #10374D;
-    height: 150px;
-    margin-bottom: 15px;
+  background-color: #10374D;
+  height: 150px;
+  margin-bottom: 15px;
+}
+
+header nav{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+#home {
+  margin-right: 175px;
+
+}
+
+#logo {
+  max-height: 115px;
+  align-items: center;
+  margin-top: 13px;
+  cursor: crosshair;
+  border: 3px solid #3A7A88;
+  border-radius: 6px;
+  padding: 2px;
+
+}
+
+#about {
+  margin-left: 175px;
+
+}
+
+.nav-links {
+  color: #F4E89F;
+  text-shadow: 2px 2px black;
+  background: #3A7A88;
+  border-radius: 6px;
+  cursor: crosshair;
+  height: auto;
+  line-height: 95px;
+  text-align: center;
+  transition-property: background;
+  transition-duration: .5s;
+  transition-timing-function: linear;
+  width: 200px;
+  display: inline-block;
+  text-decoration: none;
+  font-family: 'Yellowtail', cursive, sans-serif;
+  font-size: 32px;
+
+}
+
+.nav-links:hover {
+  background: rgb(165, 180, 248);
+
+}
+
+/* ------------------------ */
+/* BODY */
+/* ------------------------ */
+
+body {
+  background-color: #055572;
+  color: rgb(169, 227, 250);
+  height: 750px;
+  font-family: 'Shadows Into Light', cursive, sans-serif;
+  font-size: 24px;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px black;
+}
+
+#aboot{
+  text-align: center;
+  font-size: 46px;
+  font-style: italic;
+  border: 8px groove rgb(52, 48, 85);
+  color: rgb(155, 235, 253);
+  background-color: #10374D;
+  
+}
+
+/* ------------------------ */
+/* FOOTER */
+/* ------------------------ */
+
+footer section {
+  position: relative;
+  top: 15px;
+  background-color: #99AB99;
+  color: black;
+  height: 60px;
+  width: 100%;
+  display: block;
+  text-align: center;
+  border-top: 2px solid rgb(169, 227, 250);
+  margin-top: 350px;
+}
+
+/* ------------------------ */
+/* about us stuff */
+/* ------------------------ */
+
+
+#van {
+  font-size: 36px;
+  border-top: 5px solid black;
+  border-bottom: 5px solid black;
+  border-right: 5px solid black;
+  box-shadow: 10px 5px 5px rgba(15, 0, 68, 0.445);
+  margin: 60px 150px 60px 0px;
+  height: auto;
+  padding: 25px 10px;
+  }
+
+  #alex {
+  font-size: 36px;
+  text-align: right;
+  border-top: 5px solid black;
+  border-bottom: 5px solid black;
+  border-left: 5px solid black;
+  box-shadow: -10px 5px 5px rgba(15, 0, 68, 0.445);
+  margin: 60px 0px 30px 150px;
+  height: auto;
+  padding: 25px 10px;
+  
+
   }
   
-  header nav{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
+#rocket {
+  font-size: 36px;
+  border-top: 5px solid black;
+  border-bottom: 5px solid black;
+  border-right: 5px solid black;
+  box-shadow: 10px 5px 5px rgba(15, 0, 68, 0.445);
+  margin: 60px 150px 60px 0px;
+  height: auto;
+  padding: 25px 10px;
   }
-  
-  #home {
-    margin-right: 175px;
-  
+
+#ian {
+  font-size: 36px;
+  text-align: right;
+  border-top: 5px solid black;
+  border-bottom: 5px solid black;
+  border-left: 5px solid black;
+  box-shadow: -10px 5px 5px rgba(15, 0, 68, 0.445);
+  margin: 60px 0px 30px 150px;
+  height: auto;
+  padding: 25px 10px;
   }
-  
-  #logo {
-    max-height: 115px;
-    align-items: center;
-    margin-top: 13px;
-    cursor: crosshair;
-    border: 3px solid #3A7A88;
-    border-radius: 6px;
-    padding: 2px;
-  
-  }
-  
-  #about {
-    margin-left: 175px;
-  
-  }
-  
-  .nav-links {
-    color: #F4E89F;
-    text-shadow: 2px 2px black;
-    background: #3A7A88;
-    border-radius: 6px;
-    cursor: crosshair;
+
+  #imager1{
+    float: right;
+    margin-top: 48px;
+    padding: 8px;
     height: auto;
-    line-height: 95px;
-    text-align: center;
-    transition-property: background;
-    transition-duration: .5s;
-    transition-timing-function: linear;
-    width: 200px;
-    display: inline-block;
-    text-decoration: none;
-    font-family: 'Yellowtail', cursive, sans-serif;
-    font-size: 32px;
-  
+    width: 130px;
   }
-  
-  .nav-links:hover {
-    background: rgb(165, 180, 248);
-  
-  }
-  
-  /* ------------------------ */
-  /* BODY */
-  /* ------------------------ */
-  
-  body {
-    background-color: #055572;
-    color: rgb(169, 227, 250);
-    height: 750px;
-    font-family: 'Shadows Into Light', cursive, sans-serif;
-    font-size: 24px;
-    letter-spacing: 2px;
-    text-shadow: 2px 2px black;
-  }
-
-  #aboot{
-    text-align: center;
-    font-size: 46px;
-    font-style: italic;
-    border: 8px groove rgb(52, 48, 85);
-    color: rgb(155, 235, 253);
-    background-color: #10374D;
     
+  #imagel1 {
+  float: left;
+  margin-top: 35px;
+  padding-left: 8px;
+  height: auto;
+  width: 135px;
   }
-  
-  /* ------------------------ */
-  /* FOOTER */
-  /* ------------------------ */
-  
-  footer section {
-    position: relative;
-    top: 15px;
-    background-color: #99AB99;
-    color: black;
-    height: 60px;
-    width: 100%;
-    display: block;
-    text-align: center;
-    border-top: 2px solid rgb(169, 227, 250);
-    margin-top: 350px;
+
+#imager2{
+  float: right;
+  margin-top: 40px;
+  padding: 8px;
+  height: 135px;
+  width: 135px;
+}
+
+#imagel2 {
+  float: left;
+  margin-top: 25px;
+  padding: 8px;
+  height: auto;
+  width: 135px;
   }
-  
-  /* ------------------------ */
-  /* about us stuff */
-  /* ------------------------ */
 
-
-  #van {
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    border-right: 5px solid black;
-    box-shadow: 10px 5px 5px rgba(15, 0, 68, 0.445);
-    margin: 60px 150px 60px 0px;
-    height: 250px;
-    padding: 10px;
-   }
-
-   #alex {
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    border-left: 5px solid black;
-    box-shadow: -10px 5px 5px rgba(15, 0, 68, 0.445);
-    margin: 60px 0px 30px 150px;
-    height: 250px;
-    padding: 10px;
-   }
-   
-  #rocket {
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    border-right: 5px solid black;
-    box-shadow: 10px 5px 5px rgba(15, 0, 68, 0.445);
-    margin: 60px 150px 60px 0px;
-    height: 250px;
-    padding: 10px;
-   }
-
-  #ian {
-    display: inline-block;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
-    border-left: 5px solid black;
-    box-shadow: -10px 5px 5px rgba(15, 0, 68, 0.445);
-    margin: 60px 0px 30px 150px;
-    height: 250px;
-    padding: 10px;
-   }
-   .imager{
-    height: 135px;
-    width: 135px;
-   }
-   .imagel {
-    height: 135px;
-    width: 135px;
-   }
